@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>FlowScope LATENT · V1.4 3D 潜空间透视版 · K=1 三维流场世界模型</title>
+<style>
+:root{--navy:#10263d;--ink:#25445b;--quiet:#7791a1;--border:#dce9ee;--teal:#0ca5a8;--purple:#8067da;--blue:#3c80ba;--green:#32ad88;--orange:#dc9846;--paper:#f5f9fc;--white:#fff}
+*{box-sizing:border-box}html,body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei", "PingFang SC",Inter,"Noto Sans CJK SC",system-ui,sans-serif;font-size:14px}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #2fbbbd;outline-offset:2px}
+.app{height:100vh;min-height:670px;display:grid;grid-template-rows:70px minmax(0,1fr)}.header{background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;padding:0 23px;box-shadow:0 3px 15px #17445a0b;z-index:3}.brand{display:flex;align-items:center;gap:10px;min-width:235px}.logo{width:41px;height:41px;border-radius:12px;background:linear-gradient(140deg,#0c4b69,#24c7bd);color:#fff;display:grid;place-items:center;box-shadow:0 5px 16px #078fa339}.brand .name{font-weight:900;font-size:18px;letter-spacing:-.4px}.brand .name em{color:#18a8aa;font-style:normal}.brand small{display:block;letter-spacing:2px;font-size:9px;color:#8da5b1;font-weight:800;margin-top:2px}.head-title{flex:1;min-width:0}.head-title b{font-size:14px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;display:block}.head-title small{display:block;color:#92a6b1;font-size:10px;margin-top:5px}.head-actions{display:flex;gap:7px;align-items:center;flex-shrink:0}.chip{font-size:10.5px;border-radius:50px;border:1px solid #cce8eb;background:#eaf9f9;color:#137a7b;font-weight:850;padding:7px 10px}.chip.gray{background:#f2f5f8;border-color:#e0e8ed;color:#718795}.btn{background:#fff;border:1px solid #d4e4ec;border-radius:9px;color:#3a5d71;padding:9px 12px;font-size:11px;font-weight:800;min-height:35px;white-space:nowrap}.btn:hover{border-color:#8acbd1;background:#eef9fa}.btn.primary{background:#0c5c7a;color:#fff;border-color:#0c5c7a}.btn.play{background:#13a7a9;color:white;border-color:#13a7a9}.btn.play:hover{background:#0f8e91}.btn:disabled{opacity:.4;cursor:default}
+.shell{min-height:0;display:grid;grid-template-columns:220px minmax(0,1fr) 306px}.side{background:white;border-right:1px solid var(--border);padding:19px 13px;overflow-y:auto}.side .eyebrow,.inspector .eyebrow{font-size:10px;letter-spacing:1.6px;font-weight:850;color:#a0b2bf;margin:6px 8px 12px}.stage-btn{position:relative;background:#fff;border:1px solid transparent;border-radius:11px;padding:12px 11px;width:100%;display:flex;gap:10px;text-align:left;align-items:center;color:#426279;margin:3px 0;min-height:57px}.stage-btn:hover{background:#f3f9fc}.stage-btn.active{background:#e8f8f7;border-color:#a6e0de}.stage-btn.done .stage-number{background:#d9f2e7;color:#16866b}.stage-number{width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:#eaf1f6;display:grid;place-items:center;font-weight:900;font-size:10px;color:#6b8b9a}.stage-btn.active .stage-number{background:#bdeee9;color:#087b7d}.stage-btn b{font-size:11px;display:block;line-height:1.3}.stage-btn small{font-size:9.5px;color:#91a6b2;display:block;margin-top:4px}.stage-btn.active:before{content:"";height:23px;width:3px;border-radius:4px;background:#16b4b4;position:absolute;left:0;top:17px}.side-separator{height:1px;background:#e3edf2;margin:18px 7px}.side-hint{padding:10px 11px;background:#fff8eb;color:#8e774e;font-size:10.5px;line-height:1.8;border-radius:9px;border:1px solid #f1dfba}.switchline{display:flex;align-items:center;justify-content:space-between;gap:9px;font-size:11px;margin:12px 6px;color:#6c8999}.switchline select{border:1px solid #d7e8ec;background:#fff;border-radius:7px;font-size:11px;padding:5px 8px;color:#416b78}.switchline input{accent-color:#18a9a9}
+.center{overflow-y:auto;padding:17px 19px 22px;min-width:0;scrollbar-width:thin}.center-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:13px}.center-head h1{font-size:22px;letter-spacing:-.65px;margin:0;color:#213f55}.center-head p{color:#8199a9;font-size:11.3px;margin:6px 0 0}.live-status{display:flex;align-items:center;gap:7px;padding:8px 10px;background:#e8f8f7;border:1px solid #c9eae8;border-radius:8px;font-size:10px;color:#378589;font-weight:820;white-space:nowrap}.led{width:8px;height:8px;background:#14c1a5;border-radius:100%;box-shadow:0 0 0 4px #d1f0ea}.led.run{animation:ledblink 1.1s infinite}@keyframes ledblink{50%{opacity:.28}}
+.stage-view{position:relative;height:min(47vh,465px);min-height:330px;background:linear-gradient(140deg,#071d31,#0d2a45);border-radius:16px;border:1px solid #20475d;overflow:hidden;box-shadow:0 12px 28px #244f701e}.stage-view canvas{display:block;width:100%;height:100%;touch-action:none}.scene-top{position:absolute;top:16px;left:18px;right:18px;color:#eefcff;z-index:2;pointer-events:none;display:flex;align-items:flex-start;justify-content:space-between}.scene-top b{font-size:14px;letter-spacing:.1px}.scene-top small{font-size:10px;color:#8fbdc9;display:block;margin-top:6px}.scene-pill{background:#0a3852ad;border:1px solid #306d7f;border-radius:8px;color:#adf1ed;padding:6px 9px;font:700 10px Consolas,monospace}.scene-bottom{position:absolute;bottom:13px;left:17px;right:17px;display:flex;justify-content:space-between;gap:12px;align-items:center;z-index:2;color:#b6d8e3;pointer-events:none}.scene-bottom .note{font-size:10px;background:#0a2e47ba;padding:7px 9px;border:1px solid #32576a;border-radius:7px}.scene-bottom .clock{font:700 11px Consolas,monospace;font-variant-numeric:tabular-nums}.scene-bottom .clock strong{color:#89f8df}
+.console{background:#fff;border:1px solid #dbe9ef;border-radius:14px;padding:15px 15px 13px;margin-top:12px;box-shadow:0 5px 20px #174d6310}.control-top{display:flex;gap:9px;justify-content:space-between;align-items:center;flex-wrap:wrap}.play-group{display:flex;gap:6px;align-items:center}.live-timer{font:800 12px Consolas,monospace;color:#346f8b}.timeline{width:100%;appearance:none;height:9px;border-radius:10px;cursor:pointer;margin:16px 0 10px;outline:none;background:linear-gradient(90deg,#18aeaa 0,#18aeaa var(--progress,0%),#e6eff4 var(--progress,0%),#e6eff4 100%);accent-color:#12b3ae}.timeline::-webkit-slider-thumb{appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid #11a9a6;box-shadow:0 2px 9px #167a8552}.timeline::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:#fff;border:5px solid #11a9a6;box-shadow:0 2px 9px #167a8552}.timeline-labels{display:grid;grid-template-columns:repeat(9,1fr);gap:3px}.timeline-labels button{border:1px solid transparent;border-radius:6px;padding:6px 2px;background:transparent;color:#92a6b2;font-size:9px;font-weight:760;line-height:1.5}.timeline-labels button.active{background:#e4f8f6;color:#167d83;border-color:#b4e6df}.timeline-labels button:hover{background:#f1f8fb}.stage-descr{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:9px}.status-chip{display:flex;align-items:center;gap:6px;font-weight:750;color:#437b86;font-size:10.5px}.stage-descr em{font-size:10px;color:#91a7b3;font-style:normal}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:11px}.metric{background:white;border:1px solid #dce9f0;border-radius:11px;padding:11px 13px;min-width:0}.metric label{display:block;color:#8299a6;font-size:10px;margin-bottom:5px}.metric strong{display:block;color:#305877;font-size:15px;font-weight:850;font-family:Consolas,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.metric small{font-size:9.4px;color:#9eafb9;display:block;margin-top:5px}.metric.accent{border-color:#bfebe5;background:#f0faf8}.metric.accent strong{color:#168f88}.details{margin-top:11px;display:grid;grid-template-columns:1.08fr .92fr;gap:10px}.mini-panel{border:1px solid #dce9f0;background:#fff;border-radius:13px;padding:15px;min-height:150px}.mini-panel b{color:#34566c;font-size:12px}.mini-panel small{display:block;font-size:10px;line-height:1.6;color:#8da2af;margin-top:6px}.four-thumbs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:12px}.thumb{border:1px solid #d7e5ed;border-radius:7px;overflow:hidden;position:relative;background:#0a2d48;cursor:pointer;min-width:0}.thumb.active{outline:2px solid #18b9b9;outline-offset:1px}.thumb canvas{width:100%;height:50px;display:block}.thumb span{display:block;text-align:center;font-size:9px;color:#5c8591;padding:5px;background:white;font-family:Consolas,monospace}.micro-bars{margin-top:13px;display:grid;gap:10px}.micro{display:flex;align-items:center;gap:8px;font-size:10px;color:#708c9f}.micro span{width:75px}.micro .track{height:8px;border-radius:8px;background:#eaf1f6;flex:1;overflow:hidden}.micro .fill{height:100%;border-radius:8px;background:linear-gradient(90deg,#54bcc4,#9b8be0);width:50%;transition:width .12s linear}.micro output{font:700 10px Consolas,monospace;width:42px;text-align:right}
+.inspector{border-left:1px solid #dce8ef;background:#fff;overflow-y:auto;padding:19px 18px 24px;scrollbar-width:thin}.inspector h2{font-size:19px;color:#23465d;margin:9px 2px 6px;line-height:1.4}.inspect-sub{font-size:11px;color:#859aa6;margin:0 2px 23px}.inspect-section{border-top:1px solid #e5eef2;padding-top:15px;margin-top:15px}.inspect-section h3{font-size:10px;color:#99adbb;letter-spacing:1.1px;margin:0 0 9px}.code-shape{background:#f5f9fc;border:1px solid #dce9f1;border-radius:8px;color:#4f7388;font:700 11px/1.6 Consolas,monospace;padding:10px;overflow-wrap:anywhere}.desc{font-size:11.3px;line-height:1.85;color:#5f7a8b}.check-item{display:flex;gap:8px;color:#658393;font-size:11px;margin-bottom:11px;line-height:1.65}.check-item:before{content:"✓";color:#1da889;background:#e0f5eb;border-radius:50%;width:16px;height:16px;flex:0 0 16px;display:grid;place-items:center;font-weight:850}.filebox{border:1px solid #dce9f0;border-radius:8px;background:#f6f9fc;padding:9px;color:#457088;word-break:break-word;font:700 10px/1.5 Consolas,monospace}.footnote{font-size:10px;line-height:1.8;color:#8b7757;background:#fff8eb;border:1px solid #f2e2c0;border-radius:9px;padding:10px;margin-top:19px}
+@media(max-width:1180px){.shell{grid-template-columns:193px minmax(0,1fr) 265px}.header{padding:0 13px}.brand{min-width:180px}.center{padding:13px}.stage-view{height:410px}.head-title small{display:none}}@media(max-width:960px){.app{height:auto;min-height:100vh}.shell{grid-template-columns:1fr}.side{border-right:0;border-bottom:1px solid #e0eaf1;display:block;overflow-x:auto;padding:8px}#stages{display:flex;width:max-content;gap:6px}.side .eyebrow,.side .side-separator,.side .side-hint,.side .switchline{display:none}.stage-btn{min-width:123px;width:123px;padding:8px}.stage-btn small{display:none}.inspector{border-left:0;border-top:1px solid #dce8ef}.header{flex-wrap:wrap;height:auto;min-height:70px;padding:10px}.brand{min-width:165px}.head-title{display:none}.center{overflow:visible}.stage-view{height:440px}}@media(max-width:570px){.header{gap:8px}.head-actions .chip{display:none}.brand .name{font-size:15px}.logo{height:34px;width:34px}.center-head h1{font-size:17px}.stage-view{height:340px;min-height:340px}.scene-pill{display:none}.metrics{grid-template-columns:1fr 1fr}.details{grid-template-columns:1fr}.timeline-labels button{font-size:8px;word-break:break-all}.head-actions .btn{padding:7px}}
+
+
+/* V1.4 Latent Explorer: deliberately more visual than a token-count caption. */
+.latent-jump{background:#eff8fc!important;border-color:#a2d5dc!important;color:#0c6980!important}
+.latent-lab{margin-top:12px;background:#fff;border:1px solid #cbdde8;border-radius:15px;padding:18px;box-shadow:0 5px 22px #12385c13;color:#28475e}
+.latent-lab[hidden]{display:none}
+.latent-header{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.latent-kicker{font-size:10px;letter-spacing:1.25px;color:#5c84aa;font-weight:800}
+.latent-header h2{font-size:19px;color:#203d54;margin:6px 0;line-height:1.4}.latent-header h2 em{font-style:normal;color:#785cc7}.latent-header p{font-size:11px;color:#668195;line-height:1.75;margin:0 0 13px}.latent-badge{flex-shrink:0;border:1px solid #e5d4a1;background:#fff9ed;color:#8c6b30;padding:7px 10px;font-size:10px;border-radius:8px;max-width:180px;line-height:1.45}
+.latent-ladder{display:flex;align-items:stretch;gap:5px;overflow-x:auto;padding:5px 0 13px;scrollbar-width:thin}.lat-step{background:#f5f9fc;border:1px solid #e1e9f0;border-radius:9px;display:flex;flex-direction:column;gap:4px;padding:10px 9px;min-width:152px;flex:1}
+.lat-step.input{background:#edf8fa;border-color:#bbe4e8}.lat-step.active{background:#f1ecfd;border:1px solid #baa6f2}.lat-step small{font-size:9px;color:#809caf;font-weight:650}.lat-step b{font:800 11px/1.5 Consolas,monospace;white-space:nowrap;color:#2b5977}.lat-step span{font-size:9px;color:#95aabb}.lat-arr{font-weight:900;color:#8db4cc;font-size:20px;align-self:center;flex-shrink:0}
+.latent-tabs{display:flex;gap:8px;border-bottom:1px solid #dde8ee;padding-bottom:10px}.latent-tabs button{border:1px solid #dfe7ee;border-radius:7px;background:#f7fafc;padding:9px 10px;color:#64869d;font-size:11px;font-weight:800}.latent-tabs button.active{background:#f0eafd;border-color:#bba5ed;color:#6548ad}
+.latent-tab-body{margin-top:12px}.latent-tab-body.hidden{display:none}.latent-tab-body[data-lat-body=grid]{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:14px}.latent-tab-body[data-lat-body=grid].hidden{display:none}
+.lat-left,.lat-right{min-width:0;border:1px solid #e5edf3;border-radius:12px;padding:12px;background:#fbfdff}.lat-pane-head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}.lat-pane-head b{font-size:11px;color:#39566d}.lat-pane-head small{font-size:9px;color:#8ba2b3}
+#latentGridCanvas,#latentFeaturesCanvas{display:block;width:100%;height:260px;min-height:220px;border:1px solid #244258;border-radius:11px;background:#0c1d35;cursor:crosshair}#latentFeaturesCanvas{height:260px}.lat-axis{font-size:10px;color:#7895aa;margin-top:8px}
+.lat-coord-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:11px}.lat-coord-controls label{display:flex;align-items:center;flex-wrap:wrap;justify-content:space-between;font-weight:800;color:#526c80;font-size:10px}.lat-coord-controls input{width:100%;accent-color:#8067da}.lat-coord-controls output{font:700 12px Consolas,monospace;color:#7459ba}
+.lat-frame-controls{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:13px;font-size:10px}.lat-frame-controls b{color:#648198}.lat-frame-controls button{border:1px solid #d9e5ee;background:white;color:#5980a0;padding:5px 9px;border-radius:6px;font:800 10px Consolas,monospace}.lat-frame-controls button.active{border-color:#ac99e6;background:#f1ecfb;color:#7256b2}.lat-frame-controls small{width:100%;color:#92a6b4;font-size:9px}
+.lat-vector{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:10px;background:#f2f1fb;border-radius:8px;margin-top:9px;font:700 10px Consolas,monospace;color:#624a8a}.lat-vector b{color:#563b86}.lat-vector span{background:white;border-radius:5px;padding:3px 6px}.lat-voxel-footprint{margin-top:7px;padding:7px 9px;border-radius:7px;background:#edf7fa;font:700 10px/1.6 Consolas,monospace;color:#3f778d}.lat-vector-caption{color:#7e8da4;font-size:10px;line-height:1.75;margin-top:9px}
+.lat-stat-strip{margin-top:13px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.lat-stat-strip>div{background:#f6f9fc;border:1px solid #e2ebf0;border-radius:9px;padding:11px;min-width:0}.lat-stat-strip small{font-size:9.4px;color:#839ba9;display:block}.lat-stat-strip strong{font:800 12px/1.6 Consolas,monospace;color:#325776;display:block;overflow-wrap:anywhere}.lat-stat-strip span{font-size:9px;color:#8da6b5;display:block;line-height:1.6}
+.latent-disclaimer{border-left:3px solid #c7afd8;background:#fbf9fd;padding:9px 12px;color:#7d7891;font-size:10px;line-height:1.7;margin:12px 0 0}
+.lattem-head{font-size:12px;color:#4c6a85;margin-bottom:16px;line-height:1.65}.lat-tem-frames{display:flex;gap:9px;align-items:stretch;overflow-x:auto}.lat-timeframe,.lat-dec-root{background:#eff7fb;border:1px solid #b9d9ea;border-radius:11px;padding:16px 12px;flex:1;min-width:120px;display:flex;flex-direction:column;gap:9px;align-items:center;justify-content:center;text-align:center}.lat-timeframe span{font-size:11px;color:#367d8d;font-weight:800}.lat-timeframe b,.lat-dec-root b{font:800 12px Consolas,monospace;color:#254e74}.lat-timeframe small,.lat-dec-root small{font-size:9.4px;color:#829eb0}.lat-timeframe.target,.lat-dec-root.purple{background:#f0ecfd;border-color:#c5b3ed}.lat-timeframe.target b,.lat-dec-root.purple b{color:#7457b8}
+.lattem-branches{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.lattem-branches>div{background:#fafcff;border:1px solid #e3ebf2;border-radius:10px;padding:12px}.lattem-branches b{font-size:11px;color:#466b87}.lattem-branches p{font-size:10px;line-height:1.8;color:#8198a9;margin-bottom:0}.lat-formula{margin-top:15px;background:#ecf5fa;border:1px solid #d3e5ee;border-radius:9px;padding:12px;text-align:center;font:700 11px/1.8 Consolas,monospace;color:#416d82}
+.latdec-layout{display:flex;gap:8px;align-items:center;justify-content:center}.lat-dec-root{min-height:70px}.lat-dec-root.amber{background:#fff6e8;border-color:#ead9b2}.lat-dec-root.amber b{color:#93602b}.latdec-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.lat-dec-flow{display:grid;gap:7px}.lat-dec-flow>span{text-align:center;color:#98a6bf;font-size:18px;font-weight:900}.lat-dec-end{margin-top:14px;background:#ecf9f3;border:1px solid #b5e1d1;color:#297756;border-radius:9px;padding:14px;text-align:center;font-size:12px;line-height:1.65}
+@media(max-width:1420px){.latent-lab{padding:12px}.latent-header h2{font-size:17px}.lat-step{min-width:147px}.latent-tab-body[data-lat-body=grid]{grid-template-columns:1fr}.lat-stat-strip{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:960px){.latent-lab{padding:13px}.latent-tab-body[data-lat-body=grid]{grid-template-columns:1fr}.latent-header{flex-wrap:wrap}.latent-badge{max-width:none}.lattem-branches{grid-template-columns:1fr}}
+@media(max-width:570px){.latent-tabs{display:grid;grid-template-columns:1fr}.lat-dec-root{min-width:125px}.latdec-layout{overflow-x:auto;justify-content:flex-start}.lat-stat-strip{grid-template-columns:1fr 1fr}.latdec-split{grid-template-columns:1fr}.lat-coord-controls{gap:5px}.lat-timeframe{min-width:130px}#latentGridCanvas,#latentFeaturesCanvas{height:235px}}
+
+/* V1.3 real data bridge. */
+.import-set{display:grid;gap:5px;padding:0 5px}.import-set .btn{width:100%;white-space:normal;text-align:left;font-size:10.5px;padding:7px 10px}
+.source-status{font-size:10.5px;line-height:1.6;border-radius:9px;background:#f0f7fb;border:1px solid #cce5f0;padding:9px 10px;margin:10px 5px;color:#376f8a;overflow-wrap:anywhere}
+.source-status.fail{background:#fff1ef;border-color:#f0bdb3;color:#994c41}.source-status.real{background:#e8f9f2;border-color:#a5dfcb;color:#26795a}
+#sourceBadge{color:#eff9b3;border-color:#779a76;max-width:40%;white-space:normal}
+@media(max-width:940px){.import-set{display:flex;flex-wrap:wrap;gap:4px}.import-set .btn{width:auto;flex:1 1 125px}#sourceBadge{max-width:50%}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="header">
+  <div class="brand"><div class="logo"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M3 15C7 15 7 6 12 7s5 12 9 7" stroke="white" stroke-width="2.7" stroke-linecap="round"/><circle cx="21" cy="14" r="2.5" fill="#B9FBEC"/></svg></div><div><div class="name">FlowScope <em>LIVE</em></div><small>3D WORLD MODEL · V1.4 LATENT EXPLORER</small></div></div>
+  <div class="head-title"><b>三维流场世界模型｜从 CFD 流场到未来流场的动态数据旅程</b><small>逐帧归一化 · 3D DC-AE f8 · 2304 Tokens · 因果 Transformer · 单 Flow Matching</small></div>
+  <div class="head-actions"><span class="chip">K = 1 · 确定性</span><span class="chip gray">WTA / 概率关闭</span><button class="btn latent-jump" id="latentJump" type="button">▦ 潜空间透视</button><button class="btn" id="resetTop">↺ 重置</button><button class="btn primary" id="shotBtn">保存画面</button></div>
+</header>
+<div class="shell">
+<aside class="side"><div class="eyebrow">NINE STAGES / MODULES</div><div id="stages"></div><div class="side-separator"></div><div class="eyebrow">DISPLAY OPTIONS</div><div class="switchline">物理通道<select id="channel"><option value="u">u / 流向速度</option><option value="v">v / 横向速度</option><option value="w">w / 展向速度</option><option value="p">p / 压力</option></select></div><div class="switchline">播放速度<select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></div><div class="side-separator"></div>
+<div class="eyebrow">REAL DATA / IMPORT</div>
+<div class="import-set"><button class="btn" id="cfdBtn" type="button">导入 CFD 切片 JSON</button><button class="btn" id="predBtn" type="button">导入模型预测 JSON</button><button class="btn" id="demoBtn" type="button">返回合成演示</button></div>
+<input type="file" id="cfdFile" accept=".json,application/json" hidden><input type="file" id="predFile" accept=".json,application/json" hidden>
+<div class="switchline">展向切片<select id="sliceSelect" disabled><option value="0">示意切片</option></select></div>
+<div id="sourceStatus" class="source-status" role="status" aria-live="polite">当前：合成示意。真实 CFD 需导入由 NPZ 转换的 JSON；真实模型预测需单独导入。</div>
+<div class="side-separator"></div><div class="side-hint" id="dataDisclaimer">当前动画用于展示网络数据流；除明确标注导入的数据外，Encoder、Transformer、FM、Decoder 均未进行真实模型计算。</div></aside>
+<main class="center">
+ <div class="center-head"><div><h1 id="mainTitle">01 · 三维四场输入</h1><p id="mainSubtitle">观察圆柱尾迹四物理通道如何进入网络</p></div><div class="live-status"><span class="led" id="led"></span><span id="liveText" aria-live="polite">准备播放 · 画面持续更新</span></div></div>
+ <section class="stage-view" aria-label="动画演示画布"><canvas id="scene" aria-label="实时示意动画"></canvas><div class="scene-top"><div><b id="sceneLabel">FLOW INPUT · 3D FIELD</b><small id="sceneHint">示意数据 · 几何 / 流场 / 时间逐步演化</small></div><div class="scene-pill" id="scenePill">[B,T,4,64,96,192]</div></div><div class="scene-bottom"><span class="note" id="sourceBadge">合成示意 · 未接入模型</span><span class="note" id="sceneNote">圆柱尾迹随时间移动；可切换 u/v/w/p</span><span class="clock">动画相位 = <strong id="clock">0.00</strong> · <strong id="playState">PAUSED</strong></span></div></section>
+ <section class="console"><div class="control-top"><div class="play-group"><button class="btn" id="prev">◀ 上一步</button><button class="btn play" id="play">▶ 开始动态演示</button><button class="btn" id="next">下一步 ▶</button><button class="btn" id="reset">↺</button></div><div class="live-timer"><span id="idx">01 / 09</span> · <span id="percent">0%</span></div></div><input class="timeline" id="timeline" type="range" min="0" max="8999" value="0" aria-label="拖动查看完整演示进度"/><div id="timeLabels" class="timeline-labels"></div><div class="stage-descr"><div class="status-chip"><span class="led" id="statusLed"></span><span id="action" aria-live="polite">点击播放，观看九个阶段的动画</span></div><em>拖动时间轴或点击模块可自由跳转</em></div></section>
+ <section class="metrics"><div class="metric accent"><label>当前计算空间</label><strong id="mShape">64 × 96 × 192</strong><small id="mShapeSub">1,179,648 voxels</small></div><div class="metric"><label>特征 / 通道</label><strong id="mChannels">u · v · w · p</strong><small id="mChannelsSub">4 fields + 2 geometry</small></div><div class="metric"><label>生成 / 滚动进度</label><strong id="mProgress">0%</strong><small id="mProgressSub">拖动进度条可重放</small></div><div class="metric"><label>当前网络状态</label><strong id="mState">RAW INPUT</strong><small id="mStateSub">架构示意；非训练输出</small></div></section>
+ <section id="latentWorkbench" class="latent-lab" aria-label="潜空间三维 Token 透视工作台" hidden>
+  <div class="latent-header">
+    <div><div class="latent-kicker">MODULE Z / LATENT EXPLORER · 真实结构，示意激活</div>
+    <h2>潜空间不等于一张小图片：它是 <em>2304 个空间位置 × 256 维特征</em></h2>
+    <p>每帧经过三次空间下采样：<strong>[C=256, Z=8, Y=12, X=24]</strong>，展平后是 <strong>[N=2304, D=256]</strong>。<strong>b[6] 是独立的统计旁路</strong>，不是第 257～262 个特征。</p></div>
+    <span class="latent-badge" id="latentDataBadge">潜变量激活：合成示意 · 非真实 Encoder</span>
+  </div>
+  <div class="latent-ladder" aria-label="编码器张量演进">
+    <div class="lat-step input"><small>物理场 X̃ + 几何 G</small><b>6 × 64 × 96 × 192</b><span>u,v,w,p + mask,SDF</span></div>
+    <span class="lat-arr">→</span>
+    <div class="lat-step"><small>Stem / C32</small><b>32 × 64 × 96 × 192</b><span>不降采样</span></div>
+    <span class="lat-arr">→</span>
+    <div class="lat-step"><small>S2C / Down 1 · f2</small><b>64 × 32 × 48 × 96</b><span>每轴 ÷2</span></div>
+    <span class="lat-arr">→</span>
+    <div class="lat-step"><small>Down 2 · f4</small><b>128 × 16 × 24 × 48</b><span>每轴 ÷4</span></div>
+    <span class="lat-arr">→</span>
+    <div class="lat-step active"><small>Down 3 · f8</small><b>256 × 8 × 12 × 24</b><span>z_clean（三维格点）</span></div>
+  </div>
+  <div class="latent-tabs" role="tablist" aria-label="潜空间展示维度">
+    <button type="button" data-lat-tab="grid" class="active" role="tab" aria-selected="true">01 · 三维网格与 256 维</button>
+    <button type="button" data-lat-tab="temporal" role="tab" aria-selected="false">02 · 四帧进入时空模型</button>
+    <button type="button" data-lat-tab="decode" role="tab" aria-selected="false">03 · 预测潜变量如何解码</button>
+  </div>
+  <div class="latent-tab-body" id="latentGridTab" data-lat-body="grid">
+    <div class="lat-left">
+      <div class="lat-pane-head"><b>每帧：8 × 12 × 24 三维 Token 网格</b><small>点击亮点选择一个 Token · 颜色只是示意激活</small></div>
+      <canvas id="latentGridCanvas" width="580" height="280" tabindex="0" aria-label="点击三维潜空间网格选择 Token"></canvas>
+      <div class="lat-axis">X = 24（流向）　Y = 12（横向）　Z = 8（展向）</div>
+      <div class="lat-coord-controls">
+        <label>X <output id="latXVal">12</output><input type="range" id="latX" min="0" max="23" value="12"/></label>
+        <label>Y <output id="latYVal">6</output><input type="range" id="latY" min="0" max="11" value="6"/></label>
+        <label>Z <output id="latZVal">4</output><input type="range" id="latZ" min="0" max="7" value="4"/></label>
+      </div>
+      <div class="lat-frame-controls"><b>观察历史帧：</b><button type="button" data-lat-frame="0">t−3</button><button type="button" data-lat-frame="1">t−2</button><button type="button" data-lat-frame="2">t−1</button><button type="button" data-lat-frame="3" class="active">t</button><small>Stage 1 可单帧 / 三帧；Stage 2 使用 L=4</small></div>
+    </div>
+    <div class="lat-right">
+      <div class="lat-pane-head"><b>选中 Token 的 256 维特征</b><small>16×16 方格 = 256 个 learnable feature channels</small></div>
+      <canvas id="latentFeaturesCanvas" width="390" height="250" tabindex="0" aria-label="点击潜变量 256 维激活特征矩阵"></canvas>
+      <div class="lat-vector"> <b id="latTokenId">Token #1308</b><span id="latCoords">(z=4, y=6, x=12)</span><span id="latFeature">Feature[37] = 示意值</span></div>
+      <div class="lat-voxel-footprint" id="latVoxelFootprint">粗尺度索引映射：X[96:103] · Y[48:55] · Z[32:39]</div>
+      <div class="lat-vector-caption">每个格点是 <strong>256 维学习特征向量</strong>，并非 u/v/w/p 的直接采样值。没有训练好 Encoder 权重时，无法展示真实潜变量激活。</div>
+    </div>
+  </div>
+  <div class="latent-tab-body hidden" id="latentTemporalTab" data-lat-body="temporal">
+    <div class="lattem-head">同一编码器，逐帧生成 z_clean；Stage 2 接收四帧历史，并在时间上施加因果注意力</div>
+    <div class="lat-tem-frames">
+      <div class="lat-timeframe"><span>t−3</span><b>2304 × 256</b><small>b[t−3,6]</small></div>
+      <div class="lat-timeframe"><span>t−2</span><b>2304 × 256</b><small>b[t−2,6]</small></div>
+      <div class="lat-timeframe"><span>t−1</span><b>2304 × 256</b><small>b[t−1,6]</small></div>
+      <div class="lat-timeframe"><span>t</span><b>2304 × 256</b><small>b[t,6]</small></div>
+      <span class="lat-arr lat-rarr">→</span>
+      <div class="lat-timeframe target"><span>因果时空主干</span><b>Transformer</b><small>当前生成查询</small></div>
+    </div>
+    <div class="lattem-branches">
+      <div><b>空间注意力</b><p>在同一帧内部处理 2304 个空间 token 的关系；复杂度需要按实际实现和显存预算核查。</p></div>
+      <div><b>时间注意力</b><p>沿历史方向构建因果依赖。历史四帧可见，未来真实 z[t+1] 在推理时不可见。</p></div>
+      <div><b>统计与条件旁路</b><p>b [B,4,6] 与 Re、动作、物理时间间隔等条件单独编码，不能偷偷取未来真实 b。</p></div>
+    </div>
+    <div class="lat-formula">历史 z：[B,4,256,8,12,24]　↔　Token 布局：[B,4,2304,256]　→　上下文 h_t</div>
+  </div>
+  <div class="latent-tab-body hidden" id="latentDecodeTab" data-lat-body="decode">
+    <div class="latdec-layout">
+      <div class="lat-dec-root"><b>历史 z[t−3:t]</b><small>[B,4,2304,256]</small></div>
+      <span class="lat-arr">→</span><div class="lat-dec-root purple"><b>单一 FM 速度头</b><small>K=1 · 无 WTA · 无概率</small></div>
+      <span class="lat-arr">→</span><div class="lat-dec-root purple"><b>预测 ẑ[t+1]</b><small>[B,256,8,12,24]</small></div>
+    </div>
+    <div class="latdec-split"><div class="lat-dec-flow"><div class="lat-dec-root"><b>ẑ → 冻结 Decoder</b><small>C2S ×3：8×12×24 → 64×96×192</small></div><span>↓</span><div class="lat-dec-root"><b>X̃̂ [4,64,96,192]</b><small>归一化预测：ũ,ṽ,w̃,p̃</small></div></div>
+    <div class="lat-dec-flow"><div class="lat-dec-root amber"><b>历史 b → 统计预测头</b><small>预测 b̂[t+1]：4 均值 + 2 尺度</small></div><span>↓</span><div class="lat-dec-root amber"><b>b̂[t+1] [6]</b><small>不是潜空间第 257～262 通道</small></div></div></div>
+    <div class="lat-dec-end">X̃̂ + b̂ → <strong>PhysicalReadout3D</strong> → 预测真实量纲 X̂[t+1] [B,4,64,96,192] → 回填滚动历史</div>
+  </div>
+  <div class="lat-stat-strip">
+     <div><small>原始四场 / 帧</small><strong>4 × 64 × 96 × 192</strong><span>4,718,592 个标量</span></div>
+     <div><small>空间压缩</small><strong>f8 / 每轴</strong><span>体素格点数量 ÷512</span></div>
+     <div><small>潜变量 / 帧</small><strong>2304 × 256</strong><span>589,824 个标量 · 压缩比 8:1</span></div>
+     <div><small>独立旁路 b / 帧</small><strong>μu μv μw μp σuvw σp</strong><span id="latStatsState">不属于 latent feature 维度</span></div>
+  </div>
+  <p class="latent-disclaimer">视觉边界：三维点阵是规范结构的可视化；256 维热力图由确定性合成函数生成，不代表真实 Encoder 输出。导入 CFD 只提供真实场与统计量，并不会自动产生真实 z。每个 latent 位置对应步长为 8 的采样格点；它的实际感受野因卷积核而大于单纯的 8×8×8 小块。</p>
+</section>
+<section class="details"><div class="mini-panel"><b id="thumbTitle">历史流场与未来目标 · L=4</b><small id="thumbDescription">仅训练演示可查看未来真值；实际预测时只能读取四帧历史。</small><div id="thumbRow" class="four-thumbs"></div></div><div class="mini-panel"><b>当前阶段动态参数</b><small id="microNote">观察流场时序相位和展向变化；每阶段都有独立的动画状态。</small><div class="micro-bars"><div class="micro"><span id="barLabelA">演示进度</span><div class="track"><div class="fill" id="barA"></div></div><output id="barValueA">0%</output></div><div class="micro"><span id="barLabelB">场变化</span><div class="track"><div class="fill" id="barB"></div></div><output id="barValueB">0.00</output></div><div class="micro"><span id="barLabelC">流场相位</span><div class="track"><div class="fill" id="barC"></div></div><output id="barValueC">0.00</output></div></div></div></section>
+</main>
+<aside class="inspector"><div class="eyebrow">MODULE INSPECTOR · LIVE</div><h2 id="insTitle">01 · 场景与三维流场</h2><p class="inspect-sub" id="insSub">输入契约 · synthetic demonstration</p><div class="inspect-section"><h3>INPUT / 输入张量</h3><div class="code-shape" id="insInput">X [B,T,4,64,96,192]</div></div><div class="inspect-section"><h3>OUTPUT / 输出张量</h3><div class="code-shape" id="insOutput">X、G 与工况条件</div></div><div class="inspect-section"><h3>WHAT CHANGES / 动画正在展示</h3><p class="desc" id="insDesc">圆柱绕流随物理时间变化，展示各通道的空间场分布与涡结构。</p></div><div class="inspect-section"><h3>CONTRACT / 设计约束</h3><div id="insChecks"></div></div><div class="inspect-section"><h3>PLANNED SOURCE / 拟建模块</h3><div class="filebox" id="insFile">src/stage1/data/dataset.py</div></div><div class="footnote"><b>可视化边界：</b>如未导入数据，动态纹理、潜变量和误差曲线均为教学示意；已导入的 CFD 切片与模型预计算结果会分别标注。模块标注“拟建”，未表示网络已训练、物理数值已通过验证或实现了 Navier–Stokes 严格守恒。</div></aside>
+</div></div>
+<script>
+'use strict';
+const stages=[
+ {name:'三维四场输入',en:'RAW CFD INPUT',short:'输入',small:'u/v/w/p · 3D',subtitle:'圆柱尾流沿时间推进：原始物理场和固定几何',input:'u,v,w,p 与物理坐标、工况、时间',output:'X [B,T,4,64,96,192]；G [B,2,64,96,192]',shape:'64 × 96 × 192',shapeSub:'1,179,648 voxels',channels:'4 fields + G',state:'RAW INPUT',action:'涡旋在圆柱后方运动',note:'圆柱尾迹连续推进；右侧可切换 u/v/w/p',desc:'多层空间切片与粒子表示圆柱尾迹的时间演化。原始 CFD 数据应含完整坐标、有效掩码与时间，动画使用合成场。',checks:['按祖先族隔离训练与测试','真实数据必须明确 ZYX 轴序、物理坐标和单位','固体域 NaN 与真实流体域异常分开处理'],file:'src/stage1/data/dataset.py'},
+ {name:'逐帧归一化',en:'NORMALIZE + b',short:'归一化',small:'配对统计 b[6]',subtitle:'原始四场 → 每帧脉动场；六维统计独立旁路',input:'X [B,T,4,Z,Y,X]，valid_mask',output:'X̃ [B,T,4,Z,Y,X]；b [B,T,6]',shape:'64 × 96 × 192',shapeSub:'空间网格不变',channels:'4 + b[6]',state:'NORM + STATS',action:'原始场与归一化场对照',note:'统计条是合成体场采样计算值；非 CFD 物理量',desc:'在合成三维场的离散采样点上逐帧计算四均值、σuvw 与 σp；三个速度分量共用 σuvw=sqrt(var(u)+var(v)+var(w))。右侧归一化画面使用实际计算的采样统计，但不能代替真实 CFD 的完整有效体素统计。',checks:['σuvw 不额外除以 3','无效域必须先安全填充再归一化','Stage 2 不能读取未来帧真实 b'],file:'src/stage1/models/normalizer.py'},
+ {name:'三维 DC-AE 编码',en:'3D DC-AE ENCODER',short:'编码',small:'3 × S2C · f8',subtitle:'三轴逐级 ÷2、特征通道逐层增加',input:'concat(X̃,G) [B×T,6,64,96,192]',output:'z_raw [B×T,256,8,12,24]',shape:'8 × 12 × 24',shapeSub:'f8 · 3 次三维压缩',channels:'6 → 32 → 64 → 128 → 256',state:'ENCODING',action:'空间网格依次收缩到 1/8',note:'S2C 可逆重排；完整编码网络有损',desc:'逐层高亮从 64×96×192 到 8×12×24 的四级空间形态，通道逐层增加。采用 3D DC-AE 风格的 S2C 残差下采样。',checks:['主路 Conv3d＋S2C，不是简单 Stride-2 Conv','不能把整体编码器称为严格可逆','几何 G 保留独立数据契约'],file:'src/stage1/models/dcae3d/encoder.py'},
+ {name:'潜变量 Token 网格',en:'2304 LATENT TOKENS',short:'Token',small:'网格+256特征',subtitle:'点击三维格点，查看其 256 维特征向量、线性索引与时空输入',input:'z_raw [B,T,256,8,12,24]',output:'z_clean [B,T,2304,256]',shape:'8 × 12 × 24',shapeSub:'2304 token locations',channels:'D=256',state:'LATENT GRID',action:'旋转的 3D Token 晶格和激活波',note:'点击下方潜空间透视台：2304 个位置 × 每位置 256 维，b[6] 独立',desc:'每一帧的 z_clean 是 [256,8,12,24]。将 ZYX 三维网格按固定顺序展平，得到 2304 个 token，每个 token 是 256 维特征，不是 2304 维单一向量；b[6] 作为独立统计旁路。下方透视台可交互选择 (z,y,x) 和特征通道。',checks:['RMSNorm、训练微噪均为可选消融','Token index = (z×12+y)×24+x；整帧共有2304个Token','导出不应写入训练微噪'],file:'src/stage1/models/dcae3d/bottleneck.py'},
+ {name:'Stage 1 训练与冻结',en:'TRAIN · CKPT · CACHE',short:'冻结',small:'loss / sha256',subtitle:'重构、物理算子和损失通过验证后，固定编码器版本',input:'X̃，Decoder 输出，z_clean，b，mask',output:'冻结 checkpoint → (z_clean,b,条件,版本身份)',shape:'8 × 12 × 24',shapeSub:'冻结潜变量结构',channels:'C256 + b[6]',state:'CKPT DESIGN',action:'数据写入检查点和离线缓存',note:'Encoder→Decoder→Readout→Loss→更新→CKPT→缓存',desc:'Stage 1 必须先通过 Encoder、Decoder、Readout、有效域 Loss 与优化器形成训练闭环；真实验证后才能封存 checkpoint，再导出同一版本的 z_clean 和 b。物理算子、探针和时间正则均为可选项。',checks:['权重、优化器和 RNG 状态可恢复','缓存必须绑定 checkpoint SHA-256','尚无真实训练结果，不等于已冻结'],file:'src/stage1/losses/stage1.py · src/stage1/io/checkpoint.py'},
+ {name:'因果时空 Transformer',en:'CAUSAL SPATIOTEMPORAL',short:'时空',small:'历史 L=4',subtitle:'四帧历史潜变量、背景统计及已知条件流入主干',input:'z[t−3:t] [B,4,2304,256]；b 历史＋条件',output:'时空上下文 h_t，当前生成查询特征',shape:'4 × 2304',shapeSub:'历史 token 序列',channels:'D=256',state:'CAUSAL MODEL',action:'注意力信号从历史四帧流向预测位置',note:'紫色生成槽不能读取未来真实流场',desc:'用空间特征和历史时间因果注意力提取上下文。演示中历史帧和注意力连线动态流动；严格屏蔽未来真值泄漏。',checks:['时间因果注意力严格下三角','未来物理强迫仅在已知时进入条件','2304 token 的注意力复杂度需实测'],file:'src/stage2/models/temporal_transformer.py'},
+ {name:'单头 Flow Matching',en:'FLOW MATCHING · K=1',short:'FM 演化',small:'1 velocity head',subtitle:'从历史状态出发，沿生成时间 τ 前进到唯一未来潜状态',input:'h_t，zτ，τ，已知条件',output:'vθ → z_hat[t+1]；六维 b_hat[t+1]',shape:'8 × 12 × 24',shapeSub:'生成后潜空间尺寸不变',channels:'1 velocity head + b[6]',state:'K=1 · NO WTA',action:'黄色生成点沿 τ=0→1 路径前进',note:'τ 随播放进度变化；无 K 分支与概率头',desc:'演示中的黄色粒子沿预先绘制的示意轨迹从 τ=0 移到 τ=1；这是生成时间示意，不是实际数值积分得到的 ODE 轨迹。真实模型需用预测速度场进行积分，并另行预测未来六维背景统计。',checks:['K=1，不使用 WTA / π_k','FM 生成时间 τ 与物理时间 Δt 不混淆','推理时只能使用真实历史及已知条件'],file:'src/stage2/models/fm_head.py'},
+ {name:'冻结解码与物理读出',en:'DECODER · PHYSICAL READOUT',short:'解码',small:'3 × C2S · b[6]',subtitle:'潜变量经 C2S 逐级恢复，再与预测 b 配对逆归一化',input:'z_hat [B,256,8,12,24]；b_hat [B,6]；G',output:'X_hat [B,4,64,96,192]',shape:'64 × 96 × 192',shapeSub:'恢复 1,179,648 voxels',channels:'u, v, w, p',state:'DECODING',action:'潜变量逐级展开，未来圆柱尾流显现',note:'不使用固定区间限幅；固体掩码是填值而非壁面 BC',desc:'冻结 3D Decoder 使用三级 C2S 恢复归一化四场，然后通过 b_hat 还原物理单位，得到单条未来四场预测。',checks:['输出 Head 保持线性','未来使用预测统计 b_hat，不能偷用真值','散度和旋度仅在有效差分模板评估'],file:'src/stage1/models/dcae3d/decoder.py · src/stage1/models/readout.py'},
+ {name:'自由滚动与独立评估',en:'AUTOREGRESSIVE ROLLOUT',short:'滚动',small:'H=10/50/100',subtitle:'预测 (z,b) 回填历史，持续推进到多个未来时刻',input:'历史窗口 + 预测的 z_hat[t+1]、b_hat[t+1]',output:'H=10/50/100 的自由滚动流场与评估',shape:'64 × 96 × 192',shapeSub:'每个未来时刻一个完整场',channels:'4 physical fields',state:'ROLLING OUT',action:'滚动步数增加，未来流场纹理持续前进',note:'预测过程不读取未来 CFD 真值；曲线仅示意',desc:'将预测状态回填历史窗，自由滚动 H=10/50/100。独立报告每个通道 RMSE、涡量、散度与误差随预测步数变化。',checks:['自由滚动不能重新编码未来真值','指标按速度和压力单位分别报告','任何示意误差曲线都不是性能实测'],file:'src/stage2/eval/rollout.py'}
+];
+const S=stages.length,DURATION=3.6,TOTAL=S*DURATION;
+const $=id=>document.getElementById(id);
+const state={time:0,playing:true,speed:1,field:'u',slice:.55,sceneTime:0,last:0,lastThumb:0,lastRender:0};
+const palettes={u:['#19416b','#1d8dc0','#35d3c2','#ffdc8a','#f28b60'],v:['#243d78','#355dce','#49babe','#f1d38b','#e77977'],w:['#253c70','#4764b3','#67bfc5','#b7d3c9','#e4b684'],p:['#252c63','#6a60bb','#6bc0c0','#e6ba7d','#d97166']};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t;
+const percent=()=>Math.min(100,Math.round(state.time/TOTAL*100));
+// Avoid floating point boundaries (18 / 3.6 may be 4.999999999999999).
+const currentStage=()=>Math.min(S-1,Math.max(0,Math.floor((state.time+1e-8)/DURATION)));
+const local=()=>clamp((state.time-currentStage()*DURATION)/DURATION,0,1);
+let lastStage=-1, canvasCache=new Map();
+function setup(){
+ $('stages').innerHTML=stages.map((v,i)=>`<button class="stage-btn" data-id="${i}" type="button"><span class="stage-number">${String(i+1).padStart(2,'0')}</span><span><b>${v.name}</b><small>${v.small}</small></span></button>`).join('');
+ $('timeLabels').innerHTML=stages.map((v,i)=>`<button data-time="${i}" type="button">${String(i+1).padStart(2,'0')}<br>${v.short}</button>`).join('');
+ document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>goto(+b.dataset.id));
+ document.querySelectorAll('[data-time]').forEach(b=>b.onclick=()=>goto(+b.dataset.time));
+ $('thumbRow').innerHTML=Array.from({length:5},(_,i)=>`<div class="thumb ${i===4?'future':''}" data-thumb="${i}"><canvas width="160" height="60"></canvas><span>${['t−3','t−2','t−1','t','t+1'][i]}</span></div>`).join('');
+ $('cfdBtn').onclick=()=>{ $('cfdFile').click(); };
+ $('predBtn').onclick=()=>{ $('predFile').click(); };
+ $('demoBtn').onclick=()=>{ importedCFD=null; importedPrediction=null;state.dataMode='demo';$('sourceStatus').className='source-status';$('sourceStatus').textContent='已返回合成示意模式；无真实模型计算。';refreshDataUI(); };
+ $('cfdFile').onchange=async(e)=>{await importJsonFile(e.target.files[0],'cfd');e.target.value='';};
+ $('predFile').onchange=async(e)=>{await importJsonFile(e.target.files[0],'prediction');e.target.value='';};
+ $('sliceSelect').onchange=()=>{state.slice=Number($('sliceSelect').value);render(performance.now());updateThumbs(state.sceneTime);};
+ $('play').onclick=()=>{state.playing=!state.playing;if(state.playing&&state.time>=TOTAL-.04)state.time=0; updateStatic();};
+ $('prev').onclick=()=>goto(Math.max(0,currentStage()-1));
+ $('next').onclick=()=>goto(Math.min(S-1,currentStage()+1));
+ $('reset').onclick=$('resetTop').onclick=()=>{state.time=0;state.sceneTime=0;state.playing=false;updateStatic();render(performance.now())};
+ $('channel').onchange=e=>{state.field=e.target.value;updateThumbs(state.sceneTime);updateStatic();render(performance.now());};
+ $('speed').onchange=e=>state.speed=Number(e.target.value)||1;
+ $('timeline').oninput=e=>{state.time=clamp((+e.target.value/8999)*TOTAL,0,TOTAL-.0001);updateStatic();render(performance.now())};
+ $('shotBtn').onclick=()=>{const cn=$('scene');cn.toBlob(blob=>{if(!blob)return;const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='FlowScope_K1_Live_Stage_'+String(currentStage()+1).padStart(2,'0')+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),800)},'image/png')};
+ window.addEventListener('keydown',e=>{if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement?.tagName))return;if(e.code==='Space'){e.preventDefault();$('play').click()}if(e.key==='ArrowRight')$('next').click();if(e.key==='ArrowLeft')$('prev').click()});
+ document.addEventListener('visibilitychange',()=>{state.last=0});
+ updateStatic();render(performance.now());requestAnimationFrame(tick);
+}
+function goto(i){state.time=clamp(i*DURATION,0,TOTAL-.001);updateStatic();render(performance.now())}
+function updateStatic(){
+ const i=currentStage(),s=stages[i];
+ if(i!==lastStage){
+ $('mainTitle').textContent=String(i+1).padStart(2,'0')+' · '+s.name;
+ $('mainSubtitle').textContent=s.subtitle;
+ $('sceneLabel').textContent=s.en;
+ $('sceneHint').textContent=s.subtitle;
+ $('scenePill').textContent=s.output.split('；')[0].slice(0,49);
+ $('sceneNote').textContent=s.note;
+ $('mShape').textContent=s.shape;$('mShapeSub').textContent=s.shapeSub;
+ $('mChannels').textContent=s.channels;$('mChannelsSub').textContent='设计契约 · 非实测';
+ $('mState').textContent=s.state;$('mStateSub').textContent='模块尚待正式训练验证';
+ $('insTitle').textContent=String(i+1).padStart(2,'0')+' · '+s.name;
+ $('insSub').textContent=s.en+' · planned module';
+ $('insInput').textContent=s.input;$('insOutput').textContent=s.output;
+ $('insDesc').textContent=s.desc;
+ $('insChecks').innerHTML=s.checks.map(c=>`<div class="check-item">${c}</div>`).join('');
+ $('insFile').textContent=s.file;$('microNote').textContent=s.desc;
+ document.querySelectorAll('.stage-btn').forEach((e,n)=>{e.classList.toggle('active',n===i);e.classList.toggle('done',n<i)});
+ document.querySelectorAll('[data-time]').forEach((e,n)=>e.classList.toggle('active',n===i));
+ lastStage=i;
+  updateThumbs(state.sceneTime); updateSourceUI();latentShowForStage(i);
+ }
+ $('play').textContent=state.playing?'❚❚ 暂停演示':'▶ '+(state.time>0?'继续动态演示':'开始动态演示');
+ $('playState').textContent=state.playing?'PLAYING':'PAUSED';
+ $('liveText').textContent=state.playing?'正在演示 · 动画与进度同步':'已暂停 · 可逐步查看';
+ $('led').classList.toggle('run',state.playing);
+ $('statusLed').classList.toggle('run',state.playing);
+ $('idx').textContent=String(i+1).padStart(2,'0')+' / 09';
+ $('percent').textContent=percent()+'%';
+ $('timeline').value=Math.round((state.time/TOTAL)*8999);
+ $('timeline').style.setProperty('--progress',percent()+'%');
+ $('action').textContent=s.action;
+ const localPercent=Math.round(local()*100);
+ $('mProgress').textContent=(i===6?'τ = '+local().toFixed(2):i===8?'step ≈ '+(1+Math.floor(local()*99)):' '+localPercent+'%');
+ $('mProgressSub').textContent=i===6?'FM 生成时间，非物理 Δt':i===8?'三组评估跨度 H=10 / 50 / 100':'阶段动画局部进度';
+ $('barA').style.width=localPercent+'%';$('barValueA').textContent=localPercent+'%';
+ $('barB').style.width=(10+85*(.5+.5*Math.sin(state.sceneTime*1.8)))+'%';
+ $('barValueB').textContent=(.5+.5*Math.sin(state.sceneTime*1.8)).toFixed(2);
+ $('barC').style.width=(10+85*(.5+.5*Math.cos(state.sceneTime*1.17)))+'%';
+ $('barValueC').textContent=(state.sceneTime%6.28).toFixed(2);
+ $('barLabelA').textContent=i===6?'FM τ':i===8?'滚动阶段':'阶段进度';
+ $('barLabelB').textContent=i===1?'σuvw 示意':i===5?'注意力脉冲':'局部活跃度';
+ $('barLabelC').textContent=i===8?'尾迹变化':'运动相位';
+ $('clock').textContent=state.sceneTime.toFixed(2);
+ const shown=(i<=1?importedCFD:(i>=7?importedPrediction:null));
+ if(shown){const fi=frameIndex(shown,state.sceneTime);
+ $('scenePill').textContent=(shown.kind==='cfd'?'CFD':'PRED')+' frame '+(fi+1)+'/'+shown.times_s.length+' · t='+shown.times_s[fi].toFixed(3)+' s';
+ }else $('scenePill').textContent=s.output.split('；')[0].slice(0,49);
+ $('thumbTitle').textContent=i<5?'训练窗口：历史 L=4 与目标':i<7?'推理输入：只有四帧历史':'推理输出：四帧历史与生成未来';
+ $('thumbDescription').textContent=i<5?(importedCFD?'训练可用：用户导入的 CFD 切片序列（不是模型输出）。':'训练阶段可以访问未来真值用于计算监督损失。'):i<7?'第五格为未知未来，不能将真实 X(t+1) 传给模型。':(importedPrediction?'第五格为用户导入的预计算模型预测，浏览器未执行神经网络。':'第五格为合成的预测示意 X̂(t+1)，并非真实 CFD 真值。');
+}
+function fitCanvas(c){const r=c.getBoundingClientRect();let w=Math.max(10,r.width),h=Math.max(10,r.height),dpr=Math.min(2,window.devicePixelRatio||1),nw=Math.round(w*dpr),nh=Math.round(h*dpr);if(c.width!==nw||c.height!==nh){c.width=nw;c.height=nh;}let ctx=c.getContext('2d',{alpha:false});ctx.setTransform(dpr,0,0,dpr,0,0);return {ctx,w,h};}
+function rounded(ctx,x,y,w,h,r,color,stroke){ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}}
+function label(ctx,txt,x,y,size=12,color='#d9f4f4',align='left',weight='600'){ctx.font=`${weight} ${size}px "Microsoft YaHei",Arial`;ctx.textAlign=align;ctx.fillStyle=color;ctx.fillText(txt,x,y)}
+function gradient(ctx,w,h){let g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,'#071d30');g.addColorStop(.6,'#0a304c');g.addColorStop(1,'#0c1d38');ctx.fillStyle=g;ctx.fillRect(0,0,w,h);ctx.strokeStyle='#7bc6d00e';ctx.lineWidth=1;for(let y=12;y<h;y+=35){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke()}}
+function particle(ctx,x,y,col='#88fff1',r=3,alpha=1){ctx.save();ctx.globalAlpha=alpha;ctx.shadowColor=col;ctx.shadowBlur=r*5;ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.restore()}
+function arrow(ctx,x1,y1,x2,y2,col='#6dd6dd',width=2,dash=false){ctx.save();ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=width;if(dash)ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-9*Math.cos(a-.42),y2-9*Math.sin(a-.42));ctx.lineTo(x2-9*Math.cos(a+.42),y2-9*Math.sin(a+.42));ctx.closePath();ctx.fill();ctx.restore()}
+function lerpColor(a,b,t){let A=[1,3,5].map(i=>parseInt(a.slice(i,i+2),16)),B=[1,3,5].map(i=>parseInt(b.slice(i,i+2),16));return A.map((v,i)=>Math.round(mix(v,B[i],t)))}
+function fieldValue(nx,ny,z,t,ch){const dx=nx-.19,dy=ny-.5;let wake=dx>0?Math.exp(-Math.abs(dy)/(0.075+dx*.16))*Math.exp(-dx*.65):0,swirl=0,rot=0,rotY=0;
+ for(let i=0;i<7;i++){let pos=(.22+i*.145+t*.095)%1.2;let cy=.5+(i%2?-.12:.12)+.024*Math.sin(t*1.2+i+z*3);let sx=(nx-pos),sy=ny-cy;let g=Math.exp(-((sx*sx)/.0038+(sy*sy)/.0055));let sign=i%2?-1:1;swirl+=sign*g;rot+=sign*sy/.092*g;rotY-=sign*sx/.085*g;}
+ if(ch==='u')return .32-1.32*wake+.73*rot+.13*Math.sin(t+nx*12+z*9)*wake;
+ if(ch==='v')return 1.2*rotY+.16*Math.sin(nx*22-t*1.8)*wake;
+ if(ch==='w')return .88*swirl*Math.sin(t*.6+z*7)+.17*wake*Math.cos(nx*18+z*13+t);
+ return -.9*Math.exp(-((dx*dx)/.008+(dy*dy)/.03))+.94*swirl+.25*Math.sin(nx*11-t*1.4)*wake;
+}
+const buffers=new Map();
+// Real statistics for the SYNTHETIC field, approximated over a deterministic
+// 3D grid of sample points (not actual CFD statistics or full-resolution data).
+let statsCache={key:null,value:null};
+function syntheticStats(time){
+ const key=Math.round(time*20)/20;
+ if(statsCache.key===key)return statsCache.value;
+ const channels=['u','v','w','p'],sums=[0,0,0,0],squares=[0,0,0,0];let n=0;
+ for(let iz=0;iz<4;iz++)for(let iy=0;iy<8;iy++)for(let ix=0;ix<12;ix++){
+  const nx=(ix+.5)/12,ny=(iy+.5)/8,z=(iz+.5)/4;
+  if(((nx-.19)/.037)**2+((ny-.5)/.09)**2<=1)continue;
+  for(let ch=0;ch<4;ch++){const v=fieldValue(nx,ny,z,key,channels[ch]);sums[ch]+=v;squares[ch]+=v*v;}
+  n++;
+ }
+ const mu=sums.map(v=>v/n),v=squares.map((x,i)=>Math.max(0,x/n-mu[i]**2));
+ const sigv=Math.max(1e-5,Math.sqrt(v[0]+v[1]+v[2]));
+ const sigp=Math.max(1e-5,Math.sqrt(v[3]));
+ statsCache={key,value:{mu,sig:[sigv,sigv,sigv,sigp],n}};
+ return statsCache.value;
+}
+function heatCanvas(ch,time,z,key='main',normalized=false){
+const demoOnly = currentStage()>=2 && currentStage()<=4 || currentStage()===6;
+const isThumb=String(key).startsWith('thumb');
+const source = (importedCFD && ((isThumb && currentStage()<=6) || (!demoOnly && currentStage()<=5))) ? importedCFD :
+    (currentStage()>=7 && importedPrediction ? importedPrediction : null);
+if(source)return measuredHeatCanvas(source,ch,time,z,key,normalized && source.kind==='cfd');let keyId=key+'-'+ch;let cn=buffers.get(keyId);if(!cn){cn=document.createElement('canvas');cn.width=156;cn.height=75;buffers.set(keyId,cn)}let c=cn.getContext('2d');let im=c.createImageData(cn.width,cn.height),pal=palettes[ch];const index={u:0,v:1,w:2,p:3}[ch];const stats=normalized?syntheticStats(time):null;
+for(let y=0;y<cn.height;y++)for(let x=0;x<cn.width;x++){let v=fieldValue(x/(cn.width-1),y/(cn.height-1),z,time,ch);if(normalized)v=(v-stats.mu[index])/stats.sig[index];let u=clamp((v+1.55)/3.1,0,1)*4,k=Math.min(3,Math.floor(u)),f=u-k,a=lerpColor(pal[k],pal[k+1],f),idx=(y*cn.width+x)*4;im.data[idx]=a[0];im.data[idx+1]=a[1];im.data[idx+2]=a[2];im.data[idx+3]=255;}c.putImageData(im,0,0);return cn;}
+function cylinder(ctx,x,y,w,h){let cx=x+.19*w,cy=y+.50*h;ctx.save();ctx.shadowColor='#b5fff4';ctx.shadowBlur=11;ctx.fillStyle='#0b2537';ctx.strokeStyle='#f1ffec';ctx.lineWidth=2.5;ctx.beginPath();ctx.ellipse(cx,cy,Math.max(7,w*.037),Math.max(7,h*.09),0,0,6.283);ctx.fill();ctx.stroke();ctx.restore()}
+function drawField(ctx,x,y,w,h,t,ch,z=.5,alpha=1,compact=false,normalized=false){ctx.save();ctx.globalAlpha=alpha;ctx.drawImage(heatCanvas(ch,t,z,compact?'mini':'main',normalized),x,y,w,h);ctx.globalAlpha=1;ctx.strokeStyle='#8ee4e675';ctx.lineWidth=1.2;ctx.strokeRect(x,y,w,h);if(!((importedCFD && currentStage()<=1)||(importedPrediction && currentStage()>=7)))cylinder(ctx,x,y,w,h);if(!compact && !(importedCFD && currentStage()<=1) && !(importedPrediction && currentStage()>=7)){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();for(let p=0;p<11;p++){let px=x+w*((p*0.113+t*.058)%1),py=y+h*(.09+(p*.085)%0.82);if(Math.abs(px-(x+.19*w))<12&&Math.abs(py-(y+.5*h))<13)continue;particle(ctx,px,py,p%3===0?'#ffe8bd':'#a7ffef',1.6,.7)}ctx.restore();}ctx.restore()}
+function fieldStack(ctx,x,y,w,h,t,ch,z=.5,n=4){for(let k=n-1;k>=0;k--){let dx=k*11,dy=-k*12;drawField(ctx,x+dx,y+dy,w,h,t-k*.16,ch,z+(k-n/2)*.07,k===0?1:.65,false);}}
+function box3(ctx,x,y,w,h,d,base,hot=false){let ox=d*.48,oy=-d*.37;let face=ctx.createLinearGradient(x,y-h/2,x+w,y+h/2);face.addColorStop(0,hot?'#a1f2e8':base);face.addColorStop(1,hot?'#4cbbdf':'#225875');ctx.lineWidth=hot?2.4:1.2;ctx.strokeStyle=hot?'#c7fff2':'#5db6c6';ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+ox,y+oy);ctx.lineTo(x+w+ox,y+oy);ctx.lineTo(x+w,y);ctx.closePath();ctx.fillStyle='#3d9aaf';ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(x+w,y);ctx.lineTo(x+w+ox,y+oy);ctx.lineTo(x+w+ox,y+h+oy);ctx.lineTo(x+w,y+h);ctx.closePath();ctx.fillStyle='#1d526d';ctx.fill();ctx.stroke();rounded(ctx,x,y,w,h,1,face,hot?'#b4fff4':'#4f9bad');ctx.strokeStyle='#d4f7f844';ctx.lineWidth=.65;for(let i=1;i<=4;i++){ctx.beginPath();ctx.moveTo(x+i*w/5,y);ctx.lineTo(x+i*w/5,y+h);ctx.stroke()}for(let i=1;i<=3;i++){ctx.beginPath();ctx.moveTo(x,y+i*h/4);ctx.lineTo(x+w,y+i*h/4);ctx.stroke()}}
+function drawStage0(ctx,w,h,t,p){let ww=w*.61,hh=h*.45,x=w*.14,y=h*.35;fieldStack(ctx,x,y,ww,hh,t,state.field,.51,5);if(w>550)label(ctx,'STREAMWISE X →',x+ww*.70,y+hh+24,11,'#b9e5e7');if(w>550){label(ctx,'SPANWISE Z',x+55,y-70,11,'#b9e5e7');label(ctx,'u / v / w / p：四物理通道',w*.65,h*.80,12,'#d9f4f4');}drawFlowLine(ctx,w,h,t)}
+function drawFlowLine(ctx,w,h,t){let y=h*.26;for(let i=0;i<4;i++){let x=w*.20+i*w*.17;particle(ctx,x+Math.sin(t*2+i)*7,y,i%2?'#ffdb8b':'#8cfcf3',3);ctx.strokeStyle='#86e9d76d';ctx.beginPath();ctx.moveTo(x,y);ctx.bezierCurveTo(x+30,y-18,x+45,y+18,x+60,y);ctx.stroke()}}
+function drawStage1(ctx,w,h,t,p){let pad=w*.06,gap=w*.05,pw=(w-pad*2-gap)/2,fh=h*.43,y=h*.34;drawField(ctx,pad,y,pw,fh,t,state.field,.5,1,false,false);drawField(ctx,pad+pw+gap,y,pw,fh,t,state.field,.5,1,false,true);label(ctx,'原始物理场 X',pad,y-15,13,'#d4f5f5');label(ctx,'逐帧归一化 X̃',pad+pw+gap,y-15,13,'#c2a6ff');arrow(ctx,pad+pw+7,y+fh/2,pad+pw+gap-7,y+fh/2,'#ffdd91',2);let st=importedCFD?importedFrameStats(t):syntheticStats(t),vals=[...st.mu,st.sig[0],st.sig[3]];for(let i=0;i<6;i++){let x=pad+12+i*(w-pad*2)/6,yb=h*.78;const level=clamp(Math.abs(vals[i])*.8,.12,1);rounded(ctx,x,yb-21,10,Math.max(4,level*20),2,i>=4?'#9d8cf2':'#5ccfd1');label(ctx,['μu','μv','μw','μp','σuvw','σp'][i],x-4,yb+17,9,'#a6cdd6');label(ctx,vals[i].toFixed(2),x-7,yb+30,9,'#d8eef1')}}
+function drawStagesBoxes(ctx,w,h,t,p,reverse=false){let bs=[{x:0.10,fac:1,c:32,shape:'64×96×192'},{x:.34,fac:.72,c:64,shape:'32×48×96'},{x:.58,fac:.53,c:128,shape:'16×24×48'},{x:.82,fac:.36,c:256,shape:'8×12×24'}];if(reverse)bs=bs.map((_,i)=>bs[3-i]);const hotIndex=Math.min(3,Math.floor(p*4));let centers=[];for(let i=0;i<4;i++){let b=bs[i],x=w*(.065+i*.245),bw=w*.12*b.fac+.02*w,bh=h*.32*b.fac+15,y=h*.46-bh/2;let hot=hotIndex===i;let pulse=(Math.sin(t*3+i)*.5+.5)*8;box3(ctx,x,y-pulse*(hot?1:0),bw,bh,bw*.48,hot?'#72d3d6':'#3d789c',hot);centers.push({x:x+bw/2,y:y+bh/2});label(ctx,b.shape,x+bw/2,h*.78,Math.max(9,Math.min(12,w*.011)),'#cbeaf0','center');label(ctx,'C='+b.c,x+bw/2,h*.84,11,hot?'#fbe4a5':'#91b9c8','center');if(i>0){arrow(ctx,centers[i-1].x+24,centers[i-1].y,centers[i].x-21,centers[i].y,hot?'#ffe39b':'#67bac9',2.5)}}let first=centers[Math.min(3,hotIndex)];particle(ctx,first.x,first.y,'#ffe299',6,.9);label(ctx,reverse?'C2S ×3：逐级恢复高分辨率':'S2C ×3：空间压缩 × 8 / axis',w/2,h*.92,13,'#e7f7f6','center')}
+function drawStage3(ctx,w,h,t,p){const nx=24,ny=12,nz=8;let a=t*.27+.45,ca=Math.cos(a),sa=Math.sin(a);let points=[];let sx=Math.min(w*.44,h*.99),sy=Math.min(w*.44,h*.99),cx=w*.50,cy=h*.53;for(let iz=0;iz<nz;iz++)for(let iy=0;iy<ny;iy++)for(let ix=0;ix<nx;ix++){let X=(ix/(nx-1)-.5)*1.55,Y=(iy/(ny-1)-.5)*1.05,Z=(iz/(nz-1)-.5)*.75;let xr=X*ca-Z*sa,zr=X*sa+Z*ca;let xx=cx+xr*sx*.50,yy=cy+(Y*.86+zr*.30)*sy*.56;let wave=.5+.5*Math.sin(t*3.5+ix*.38+iy*.23+iz*.49);points.push({x:xx,y:yy,depth:zr,active:wave,ix,iy,iz});}points.sort((a,b)=>a.depth-b.depth);for(let po of points){let r=clamp(1+1.4*po.active,.8,2.7);ctx.globalAlpha=.18+po.active*.7;ctx.fillStyle=po.active>.7?'#95f4dd':'#9a96e7';ctx.beginPath();ctx.arc(po.x,po.y,r,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;
+ let X0=(latentSelect.x/(nx-1)-.5)*1.55,Y0=(latentSelect.y/(ny-1)-.5)*1.05,Z0=(latentSelect.z/(nz-1)-.5)*.75;
+ let xr0=X0*ca-Z0*sa,zr0=X0*sa+Z0*ca,xx0=cx+xr0*sx*.50,yy0=cy+(Y0*.86+zr0*.30)*sy*.56;
+ particle(ctx,xx0,yy0,'#ffe49a',6);ctx.save();ctx.strokeStyle='#ffce7a';ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(xx0,yy0,12,0,Math.PI*2);ctx.stroke();ctx.restore();
+ label(ctx,'8 × 12 × 24 = 2304 TOKENS',w*.5,h*.84,15,'#e9f9f5','center');
+ label(ctx,'选中 #'+latentIndex()+' (z='+latentSelect.z+', y='+latentSelect.y+', x='+latentSelect.x+') · 每格 256 维',w*.5,h*.92,10,'#ffe3aa','center')}
+function drawStage4(ctx,w,h,t,p){
+ // Stage 1 backprop must be closed BEFORE publishing a checkpoint.
+ const top=[
+  {x:.065,w:.19,y:.33,text:'Encoder',sub:'z_clean'},
+  {x:.29,w:.19,y:.33,text:'Decoder',sub:'4 norm fields'},
+  {x:.515,w:.19,y:.33,text:'Readout',sub:'b → physical'},
+  {x:.74,w:.19,y:.33,text:'Masked Loss',sub:'valid / phys'}];
+ const lower=[
+  {x:.12,w:.20,y:.70,text:'Optimizer',sub:'backprop update'},
+  {x:.405,w:.20,y:.70,text:'CKPT',sub:'immutable SHA'},
+  {x:.69,w:.20,y:.70,text:'Offline cache',sub:'frozen z + b'}];
+ const bh=h*.19;
+ function node(b,index){const x=b.x*w,y=b.y*h,bw=b.w*w,hot=(Math.floor(p*7)%7)===index;
+  rounded(ctx,x,y,bw,bh,10,hot?'#21596b':'#143e58',hot?'#8cece2':'#47a3b4');
+  label(ctx,b.text,x+bw/2,y+bh*.43,Math.min(13,Math.max(10,w*.016)),'#edffff','center');
+  label(ctx,b.sub,x+bw/2,y+bh*.72,Math.min(10,Math.max(8,w*.012)),'#8fe2e0','center');}
+ top.forEach((b,i)=>node(b,i));lower.forEach((b,i)=>node(b,i+4));
+ for(let i=0;i<top.length-1;i++){const a=top[i],b=top[i+1];arrow(ctx,(a.x+a.w)*w+6,(a.y*h)+bh*.5,b.x*w-6,b.y*h+bh*.5,'#65d7d5',2);}
+ arrow(ctx,(top[3].x+top[3].w*.5)*w,top[3].y*h+bh,(lower[0].x+lower[0].w*.5)*w,lower[0].y*h-5,'#f8c978',1.7);
+ for(let i=0;i<lower.length-1;i++){let a=lower[i],b=lower[i+1];arrow(ctx,(a.x+a.w)*w+7,a.y*h+bh*.5,b.x*w-7,b.y*h+bh*.5,'#89c9ea',2);}
+ ctx.strokeStyle='#b1a7ed';ctx.setLineDash([5,5]);ctx.lineWidth=1.8;
+ ctx.beginPath();ctx.moveTo((lower[0].x+lower[0].w*.5)*w,lower[0].y*h);
+ ctx.bezierCurveTo(w*.08,h*.62,w*.06,h*.47,top[0].x*w,top[0].y*h+bh*.6);ctx.stroke();ctx.setLineDash([]);
+ label(ctx,'b 统计旁路 → Readout',w*.52,h*.265,11,'#f4da99','center');
+ label(ctx,'优化器回传至 Encoder / Decoder',w*.47,h*.92,11,'#bcd9e5','center');
+ // Training completion has not been verified: the side inspector explicitly labels this a plan.
+}
+function drawStage5(ctx,w,h,t,p){const xs=[.14,.32,.50,.68],ty=h*.43,bw=Math.min(w*.15,125),bh=h*.22;for(let i=0;i<4;i++){let x=xs[i]*w-bw/2;drawField(ctx,x,ty,bw,bh,t+i*.4,state.field,.5,1,true);label(ctx,'t'+['−3','−2','−1',''][i],xs[i]*w,ty-16,12,'#d7f4f4','center');}let xx=w*.90,yy=ty;rounded(ctx,xx-bw*.42,yy,bw*.84,bh,9,'#473966','#b99ffc');label(ctx,'QUERY',xx,yy+bh*.45,13,'#fff1ff','center');label(ctx,'t+1',xx,yy-16,12,'#eed9ff','center');for(let i=0;i<4;i++){let x=xs[i]*w,y=ty+bh*.68;ctx.strokeStyle='#9995ed70';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x,y);ctx.bezierCurveTo(x,h*.81,xx,h*.81,xx,ty+bh*.68);ctx.stroke();const q=(t*.35+i*.15)%1;let xxp=mix(x,xx,q),yp=mix(y,ty+bh*.68,q)+Math.sin(q*Math.PI)*40;particle(ctx,xxp,yp,i%2?'#b7a7ff':'#84f9e2',3,.9)}label(ctx,'历史缩略图仅作示意 · 实际输入是编码后的 z_clean 与 b；未来真值不可见',w*.5,h*.92,10,'#adceda','center')}
+function drawStage6(ctx,w,h,t,p){let x0=w*.15,x1=w*.82,cy=h*.60,py=cy-110;const f=x=>Math.sin(x*Math.PI);ctx.strokeStyle='#6075a8';ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(x0,cy);ctx.bezierCurveTo(x0+w*.24,py,x0+w*.43,py,x1,cy);ctx.stroke();ctx.strokeStyle='#b39af2';ctx.lineWidth=3;ctx.setLineDash([6,8]);ctx.beginPath();ctx.moveTo(x0,cy);ctx.bezierCurveTo(x0+w*.24,py,x0+w*.43,py,x1,cy);ctx.stroke();ctx.setLineDash([]);let x=mix(x0,x1,p),y=mix(cy,cy-90*f(p),1);particle(ctx,x,y,'#ffe093',9);for(let i=0;i<14;i++){let q=(p-i*.015+1)%1;if(q>p)continue;particle(ctx,mix(x0,x1,q),cy-90*f(q),'#9deee8',2,.8*(1-i/14))}rounded(ctx,x0-45,cy+30,105,57,9,'#153c58','#468aaf');rounded(ctx,x1-55,cy+30,112,57,9,'#38335a','#9985e6');label(ctx,'z_t',x0+6,cy+57,14,'#d9f7fb','center');label(ctx,'ẑ(t+1)',x1,cy+57,14,'#e8ddff','center');label(ctx,'τ = '+p.toFixed(2),x,Math.min(y-17,cy-27),16,'#ffe4a1','center');label(ctx,'vθ(zτ, τ | history)',w*.5,h*.32,17,'#c8c0ff','center');arrow(ctx,x0+62,cy+58,x1-65,cy+58,'#5cc6d5',1.5,true);label(ctx,'单速度头 · b̂ 同步预测 · 没有 WTA 或概率头',w*.5,h*.91,11,'#abcedd','center')}
+function drawStage7(ctx,w,h,t,p){drawStagesBoxes(ctx,w,h,t,p,true);if(p>.2){let alpha=clamp((p-.2)*1.6,0,.8),W=w*.26,H=h*.23;drawField(ctx,w*.66,h*.24,W,H,t+.6,state.field,.5,alpha,false);label(ctx,importedPrediction?'X̂：已导入预计算输出':'X̂：解码示意，非模型预测',w*.66,h*.24+H+20,11,'#d9f3ed')}}
+function drawStage8(ctx,w,h,t,p){let names=['H = 10','H = 50','H = 100'];for(let i=0;i<3;i++){let x=w*(.06+i*.32),y=h*.34,bw=w*.27,bh=h*.31;drawField(ctx,x,y,bw,bh,t+i*.75+p*i*2,state.field,.50,1,false);label(ctx,names[i],x+bw*.5,y-18,13,'#e7f7f6','center');let barw=bw*(.2+.75*p);rounded(ctx,x,y+bh+19,bw,6,3,'#204a62');rounded(ctx,x,y+bh+19,barw,6,3,['#63d8c4','#c4a2ff','#ffce80'][i]);label(ctx,'step '+Math.max(1,Math.floor(p*[10,50,100][i]))+' / '+[10,50,100][i],x,y+bh+42,10,'#b9d3df');}label(ctx,importedPrediction?'预计算预测切片：由外部推理生成，并非浏览器神经网络计算':'仅示意自由滚动；尚无模型预测数据，不能称为真实 RMSE / 散度',w*.5,h*.91,10,'#b7cbda','center')}
+function render(ts){if(currentStage()===3 && latentSelect.tab==='grid')renderLatent();let {ctx,w,h}=fitCanvas($('scene'));gradient(ctx,w,h);let i=currentStage(),p=local(),t=state.sceneTime;try{switch(i){case 0:drawStage0(ctx,w,h,t,p);break;case 1:drawStage1(ctx,w,h,t,p);break;case 2:drawStagesBoxes(ctx,w,h,t,p);break;case 3:drawStage3(ctx,w,h,t,p);break;case 4:drawStage4(ctx,w,h,t,p);break;case 5:drawStage5(ctx,w,h,t,p);break;case 6:drawStage6(ctx,w,h,t,p);break;case 7:drawStage7(ctx,w,h,t,p);break;case 8:drawStage8(ctx,w,h,t,p);break;}}catch(e){console.error('Canvas stage failed',i,e);label(ctx,'画布错误：'+e.message,20,h*.50,15,'#ffb7ab');}if(ts-state.lastThumb>=120){updateThumbs(t);state.lastThumb=ts}}
+function updateThumbs(t){
+ const thumbs=document.querySelectorAll('.thumb');const stage=currentStage();
+ thumbs.forEach((el,i)=>{
+  const cn=el.querySelector('canvas'),ctx=cn.getContext('2d');ctx.clearRect(0,0,cn.width,cn.height);
+  const futureHidden=i===4 && (stage===5 || stage===6);
+  if(futureHidden){
+   ctx.fillStyle='#211e3d';ctx.fillRect(0,0,cn.width,cn.height);
+   ctx.strokeStyle='#64578b';ctx.strokeRect(3,3,cn.width-6,cn.height-6);
+   ctx.fillStyle='#e5d8ff';ctx.font='bold 30px Arial';ctx.textAlign='center';ctx.fillText('?',cn.width*.5,cn.height*.72);
+  }else{
+   const data=(stage>=7?importedPrediction:importedCFD);
+   let f=t+(i-3)*.85;
+   if(data){const n=data.preview_shape_tzyx[0];const current=Math.max(3,Math.min(n-1,frameIndex(data,t)));const index=Math.max(0,Math.min(n-1,current-3+i));f=(index+.05)/1.3;}
+   ctx.drawImage(heatCanvas(state.field,f,selectedSliceFraction(),'thumb'+i),0,0,cn.width,cn.height);
+   if(!data){ctx.fillStyle='#0f2a3c';ctx.beginPath();ctx.arc(cn.width*.19,cn.height*.5,cn.height*.09,0,Math.PI*2);ctx.fill();
+   ctx.strokeStyle='#e6f9e7';ctx.lineWidth=1.4;ctx.stroke();}
+  }
+  el.querySelector('span').textContent=i===4 ? (stage<5?'t+1 真值':stage<7?'t+1 未知':importedPrediction?'t+1 预测':'t+1 示意') : ['t−3','t−2','t−1','t'][i];
+  el.classList.toggle('active',i===Math.min(4,Math.floor((state.time/TOTAL)*5)));
+ });
+}
+function tick(now){let dt=state.last?(now-state.last)/1000:0;state.last=now;dt=clamp(dt,0,.09);if(state.playing){state.time+=dt*state.speed;state.sceneTime+=dt*state.speed*2.3;if(state.time>=TOTAL){state.time=state.time%TOTAL;lastStage=-1}if(now-state.lastRender>=37){updateStatic();render(now);state.lastRender=now}}requestAnimationFrame(tick)}
+
+// ===== Offline CFD and externally-computed model preview bridge =====
+// Importing predictions does not execute the model inside this HTML.
+let importedCFD=null, importedPrediction=null;
+function assertBridge(cond,reason){if(!cond)throw Error(reason)}
+function finiteNumbers(arr, n, name){
+ assertBridge(Array.isArray(arr) && arr.length===n,name+' length mismatch');
+ for(let i=0;i<arr.length;i++) if(typeof arr[i]!=='number'||!Number.isFinite(arr[i]))
+   throw Error(name+' contains nonfinite / nonnumeric value at '+i);
+}
+function validateImportedData(d,kind){
+ assertBridge(d && typeof d==='object' && d.schema==='flowscope.cfd-slices.v1','Unsupported schema');
+ assertBridge(d.kind===kind,'Selected import type differs from file kind');
+ assertBridge(d.origin==='COMSOL_export'||d.origin==='test_fixture','Unsupported provenance label');
+ assertBridge(Array.isArray(d.grid_shape_zyx) && d.grid_shape_zyx.length===3 && d.grid_shape_zyx.every(Number.isInteger),'Invalid full-grid dimensions');
+ const shp=d.preview_shape_tzyx;
+ assertBridge(Array.isArray(shp)&&shp.length===4&&shp.every(n=>Number.isInteger(n)&&n>=1),'Invalid T,S,H,W preview shape');
+ const [T,S,H,W]=shp,n=T*S*H*W,nMask=S*H*W;
+ assertBridge(T<=96&&S<=8&&H<=128&&W<=256&&n<=1000000,'Preview too large for single-file UI');
+ assertBridge(d.slice_indices_z?.length===S&&d.slice_indices_z.every(i=>Number.isInteger(i)&&i>=0&&i<d.grid_shape_zyx[0]),'Invalid spanwise slices');
+ finiteNumbers(d.times_s,T,'times_s');
+ for(let i=1;i<T;i++)assertBridge(d.times_s[i]>d.times_s[i-1],'Physical times must be strictly increasing');
+ finiteNumbers(d.mask,nMask,'mask');
+ assertBridge(d.mask.every(x=>x===0||x===1)&&d.mask.some(x=>x===1),'Mask must be binary and nonempty');
+ const names=['u','v','w','p'];
+ for(const c of names){
+  finiteNumbers(d.channels?.[c],n,c);
+  finiteNumbers(d.display_ranges?.[c],2,c+' range');
+  assertBridge(d.display_ranges[c][1]>d.display_ranges[c][0],'Invalid display range '+c);
+ }
+ if(kind==='cfd'){
+   assertBridge(Array.isArray(d.stats6)&&d.stats6.length===T,'CFD requires full-frame six statistics');
+   for(const stats of d.stats6){finiteNumbers(stats,6,'stats6');assertBridge(stats[4]>0 && stats[5]>0,'Stats scales must be >0');}
+ }else{
+   assertBridge(/^[a-fA-F0-9]{64}$/.test(d.checkpoint_sha256||''),'Prediction requires checkpoint SHA-256');
+   assertBridge(/^[a-fA-F0-9]{64}$/.test(d.contract_sha256||''),'Prediction requires contract SHA-256');
+   if(importedCFD){
+     assertBridge(JSON.stringify(d.grid_shape_zyx)===JSON.stringify(importedCFD.grid_shape_zyx),'Prediction / CFD spatial grids mismatch');
+     assertBridge(JSON.stringify(d.slice_indices_z)===JSON.stringify(importedCFD.slice_indices_z),'Prediction / CFD slices mismatch');
+     assertBridge(d.preview_shape_tzyx[2]===importedCFD.preview_shape_tzyx[2] && d.preview_shape_tzyx[3]===importedCFD.preview_shape_tzyx[3], 'Prediction / CFD preview resolutions mismatch');
+   }
+ }
+ return d;
+}
+function frameIndex(d,t){return Math.max(0,Math.floor(Math.max(0,t)*1.3))%d.preview_shape_tzyx[0];}
+function selectedSliceFraction(){
+ if(!importedCFD && !importedPrediction)return .5;
+ const d=importedCFD||importedPrediction;
+ return d.preview_shape_tzyx[1]<=1?0:state.slice/Math.max(1,d.preview_shape_tzyx[1]-1);
+}
+function measuredHeatCanvas(d,ch,t,z,key,normalized){
+ const [T,S,H,W]=d.preview_shape_tzyx;
+ const zidx=Math.max(0,Math.min(S-1,Math.round(z*(S-1))));
+ const ti=frameIndex(d,t);
+ const norm=normalized && d.kind==='cfd';
+ const cnKey='real-'+key+'-'+ch;
+ let cn=buffers.get(cnKey);
+ if(!cn){cn=document.createElement('canvas');cn.width=156;cn.height=75;buffers.set(cnKey,cn)}
+ const ctx=cn.getContext('2d'),img=ctx.createImageData(cn.width,cn.height);
+ const field=d.channels[ch],range=d.display_ranges[ch];
+ const ci={u:0,v:1,w:2,p:3}[ch];
+ const mu=d.stats6?.[ti]?.[ci]||0;
+ const sig=d.stats6?.[ti]?.[ci<3?4:5]||1;
+ const pal=palettes[ch];
+ for(let iy=0;iy<cn.height;iy++)for(let ix=0;ix<cn.width;ix++){
+  const yy=Math.min(H-1,Math.floor(iy*H/cn.height)),xx=Math.min(W-1,Math.floor(ix*W/cn.width));
+  const at=(zidx*H+yy)*W+xx,idx=(ti*S*H*W)+at,i=(iy*cn.width+ix)*4;
+  let a=[12,34,49];
+  if(d.mask[at]){
+   const val=field[idx],q=norm?clamp(((val-mu)/sig+3)/6,0,1):clamp((val-range[0])/(range[1]-range[0]),0,1);
+   const u=q*4,j=Math.min(3,Math.floor(u)),frac=u-j;
+   a=lerpColor(pal[j],pal[j+1],frac);
+  }
+  img.data[i]=a[0];img.data[i+1]=a[1];img.data[i+2]=a[2];img.data[i+3]=255;
+ }
+ ctx.putImageData(img,0,0);
+ return cn;
+}
+function importedFrameStats(t){
+ const d=importedCFD,idx=frameIndex(d,t),b=d.stats6[idx];
+ return {mu:b.slice(0,4),sig:[b[4],b[4],b[4],b[5]],n:d.mask.filter(x=>x).length};
+}
+function refreshDataUI(){
+ const d=importedCFD || importedPrediction,sel=$('sliceSelect');
+ sel.disabled=!d;
+ sel.innerHTML=d?d.slice_indices_z.map((i,j)=>`<option value="${j}">z index ${i}</option>`).join(''):'<option>示意切片</option>';
+ if(d)state.slice=Math.min(d.preview_shape_tzyx[1]-1,Math.floor(d.preview_shape_tzyx[1]/2));
+ sel.value=d?String(state.slice):'0';
+ lastStage=-1;updateStatic();updateThumbs(state.sceneTime);render(performance.now());renderLatent();
+}
+function updateSourceUI(){
+ const i=currentStage();const c=importedCFD,p=importedPrediction;
+ let label='合成示意 · 未接入模型';
+ if(c && i<=1)label=c.origin==='test_fixture'?'测试合成数据（非 CFD）':'用户导入 CFD · 实测切片';
+ else if(c && (i===4||i===5))label=c.origin==='test_fixture'?'测试数据输入 · 无真实训练':'用户导入 CFD · 不代表模型训练';
+ else if(p && i>=7)label=p.origin==='test_fixture'?'测试预测样例（非模型）':'用户导入模型预计算预测';
+ else if(c || p)label='神经网络阶段仍为示意 · 无浏览器推理';
+ $('sourceBadge').textContent=label;
+ if(c || p){
+  const d=(i>=7&&p)?p:c||p;
+  if((i<=1&&c)||(i>=7&&p)) {
+   $('mShape').textContent=d.grid_shape_zyx.join(' × ');
+   $('mShapeSub').textContent='实际体网格；当前仅预览 '+d.preview_shape_tzyx.slice(1).join('×')+' 采样切片';
+   if(d.origin==='test_fixture' && i<=1)$('sceneLabel').textContent='TEST FIXTURE · NOT REAL CFD';
+  }
+  $('sourceStatus').className='source-status real';
+  $('sourceStatus').textContent=(d.origin==='test_fixture'?'测试合成样例':'用户数据，未经独立验证')+' · '+(d.kind==='cfd'?'三维场切片接口':'外部预计算预测接口')+' · '+d.preview_shape_tzyx[0]+' 帧 × '+d.preview_shape_tzyx[1]+' 展向切片 · '+(d.source_filename||'未命名');
+ }
+}
+async function importJsonFile(file,kind){
+ if(!file)return;
+ try{
+  if(file.size>30*1024*1024)throw Error('Preview JSON exceeds 30 MiB limit');
+  const d=validateImportedData(JSON.parse(await file.text()),kind);
+  if(kind==='cfd'){
+   if(importedPrediction && (JSON.stringify(d.grid_shape_zyx)!==JSON.stringify(importedPrediction.grid_shape_zyx) || JSON.stringify(d.slice_indices_z)!==JSON.stringify(importedPrediction.slice_indices_z)))
+     importedPrediction=null;
+   importedCFD=d;
+  } else importedPrediction=d;
+  state.sceneTime=0;state.playing=false;
+  refreshDataUI();
+ }catch(e){
+  $('sourceStatus').className='source-status fail';
+  $('sourceStatus').textContent='导入失败：'+String(e.message||e);
+ }
+}
+
+
+// --------------------------------------------------------------------------
+// LATENT EXPLORER V1.4: structural geometry is exact; activation is synthetic.
+// A real encoder forward/export is required before actual feature values exist.
+// --------------------------------------------------------------------------
+const latentSelect={x:12,y:6,z:4,frame:3,feature:37,tab:'grid',points:[]};
+const LAT_Z=8,LAT_Y=12,LAT_X=24,LAT_C=256;
+function latentIndex(){return (latentSelect.z*LAT_Y+latentSelect.y)*LAT_X+latentSelect.x}
+function latentDemoFeature(channel=latentSelect.feature){
+ const {x,y,z,frame}=latentSelect;
+ return .68*Math.sin(x*.33+y*.25+z*.42+channel*.19+frame*.67)*Math.cos(channel*.081+y*.19)+.22*Math.sin(x*.17+channel*.37-z*.30);
+}
+function latentSetCoords(x,y,z){
+ latentSelect.x=Math.max(0,Math.min(23,Math.round(x)));
+ latentSelect.y=Math.max(0,Math.min(11,Math.round(y)));
+ latentSelect.z=Math.max(0,Math.min(7,Math.round(z)));
+ for(const [id,val] of [['latX',latentSelect.x],['latY',latentSelect.y],['latZ',latentSelect.z]]){
+  $(id).value=val;$(id+'Val').textContent=val;
+ }
+ renderLatent();if(currentStage()===3)render(performance.now());
+}
+function latentChooseTab(tab){
+ if(!['grid','temporal','decode'].includes(tab))return;
+ latentSelect.tab=tab;
+ document.querySelectorAll('[data-lat-tab]').forEach(b=>{
+  const active=b.dataset.latTab===tab;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active));
+ });
+ document.querySelectorAll('[data-lat-body]').forEach(b=>b.classList.toggle('hidden',b.dataset.latBody!==tab));
+ renderLatent();
+}
+function latentFitCanvas(id){
+ const canvas=$(id);if(!canvas)return null;
+ const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height)return null;
+ const scale=Math.min(2,devicePixelRatio||1),w=rect.width,h=rect.height;
+ if(canvas.width!==Math.round(w*scale)||canvas.height!==Math.round(h*scale)){
+  canvas.width=Math.round(w*scale);canvas.height=Math.round(h*scale);
+ }
+ const cx=canvas.getContext('2d');cx.setTransform(scale,0,0,scale,0,0);
+ return {ctx:cx,w,h};
+}
+function renderLatentGrid(){
+ const c=latentFitCanvas('latentGridCanvas');if(!c)return;
+ const {ctx,w,h}=c;ctx.fillStyle='#0a1b2d';ctx.fillRect(0,0,w,h);
+ const grad=ctx.createRadialGradient(w*.42,h*.45,0,w*.42,h*.45,w*.7);
+ grad.addColorStop(0,'#233953');grad.addColorStop(1,'#0a1b2d');ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+ const angle=.37+Math.sin(state.sceneTime*.14)*.16;
+ const ca=Math.cos(angle),sa=Math.sin(angle);
+ const points=[];
+ for(let iz=0;iz<8;iz++)for(let iy=0;iy<12;iy++)for(let ix=0;ix<24;ix++){
+  const X=(ix-11.5)/23,Y=(iy-5.5)/11,Z=(iz-3.5)/7;
+  const xr=X*ca-Z*sa,depth=X*sa+Z*ca;
+  const px=w*.5+xr*w*.62,py=h*.52+(Y*.89+depth*.28)*h*.68;
+  const v=.5+.5*Math.sin(ix*.27+iy*.37+iz*.41+latentSelect.frame*.5);
+  points.push({x:px,y:py,depth,ix,iy,iz,v});
+ }
+ points.sort((a,b)=>a.depth-b.depth);
+ // Draw the complete 8*12*24 = 2304 points, never subsample the displayed grid.
+ for(const p of points){
+  ctx.globalAlpha=.16+.78*p.v;
+  ctx.fillStyle=p.v>.66?'#71ecd5':p.v>.36?'#a8abf7':'#486c8d';
+  ctx.beginPath();ctx.arc(p.x,p.y,1.05+1.1*p.v,0,Math.PI*2);ctx.fill();
+ }
+ ctx.globalAlpha=1;
+ const selected=points.find(p=>p.ix===latentSelect.x&&p.iy===latentSelect.y&&p.iz===latentSelect.z);
+ if(selected){
+  ctx.strokeStyle='#ffe5a5';ctx.lineWidth=2;
+  ctx.beginPath();ctx.arc(selected.x,selected.y,8,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#ffe2a0';ctx.beginPath();ctx.arc(selected.x,selected.y,4,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.moveTo(selected.x+7,selected.y-5);ctx.lineTo(Math.min(w-118,selected.x+32),Math.max(20,selected.y-35));ctx.stroke();
+  ctx.fillStyle='#ffe0a6';ctx.font='700 12px Consolas';ctx.textAlign='left';
+  ctx.fillText('Token #'+latentIndex(),Math.max(8,Math.min(w-115,selected.x+35)),Math.max(16,selected.y-37));
+ }
+ ctx.fillStyle='#acc7d9';ctx.font='700 10px Consolas';ctx.textAlign='left';ctx.fillText('3D grid [Z=8,Y=12,X=24]',12,19);
+ ctx.textAlign='right';ctx.fillText('2304 / 2304 位置',w-12,19);
+ latentSelect.points=points;
+}
+function renderLatentFeatures(){
+ const c=latentFitCanvas('latentFeaturesCanvas');if(!c)return;
+ const {ctx,w,h}=c;ctx.fillStyle='#101b30';ctx.fillRect(0,0,w,h);
+ const side=Math.min((w-30)/16,(h-46)/16),ox=(w-side*16)/2,oy=27;
+ for(let feature=0;feature<256;feature++){
+  const val=latentDemoFeature(feature),col=val>=0?`rgba(80,221,194,${.20+Math.min(1,val)*.8})`:`rgba(159,130,255,${.20+Math.min(1,-val)*.75})`;
+  const gx=feature%16,gy=Math.floor(feature/16),x=ox+gx*side,y=oy+gy*side;
+  ctx.fillStyle=col;ctx.fillRect(x+1,y+1,Math.max(0,side-2),Math.max(0,side-2));
+  if(feature===latentSelect.feature){ctx.strokeStyle='#ffe49c';ctx.lineWidth=2.2;ctx.strokeRect(x+.4,y+.4,side-1,side-1)}
+ }
+ ctx.fillStyle='#d9e6f6';ctx.font='700 11px Consolas';ctx.textAlign='left';ctx.fillText('D=256 | 16 × 16',ox,17);
+ ctx.fillStyle='#97b5cc';ctx.font='10px Consolas';ctx.fillText('− activation',ox,h-9);
+ ctx.fillStyle='#88ead2';ctx.textAlign='right';ctx.fillText('+ activation',ox+16*side,h-9);
+ latentSelect.featureRect={ox,oy,side};
+}
+function renderLatent(){
+ const lab=$('latentWorkbench');if(!lab||lab.hidden)return;
+ $('latTokenId').textContent='Token #'+latentIndex();
+ $('latCoords').textContent='(z='+latentSelect.z+', y='+latentSelect.y+', x='+latentSelect.x+')';
+ $('latFeature').textContent='feature['+latentSelect.feature+'] = '+latentDemoFeature().toFixed(3)+'（示意）';
+ $('latVoxelFootprint').textContent='粗网格索引映射（非真实卷积感受野）：X['+(latentSelect.x*8)+':'+(latentSelect.x*8+7)+'] · Y['+(latentSelect.y*8)+':'+(latentSelect.y*8+7)+'] · Z['+(latentSelect.z*8)+':'+(latentSelect.z*8+7)+']';
+ let info='b[6] 独立于 z；当前无真实 latent 激活';
+ if(importedCFD && Array.isArray(importedCFD.stats6) && importedCFD.stats6.length){
+  let t=frameIndex(importedCFD,state.sceneTime),b=importedCFD.stats6[t];
+  info='已导入 b['+t+']：σuvw='+b[4].toPrecision(3)+'，σp='+b[5].toPrecision(3)+'（不代表 z 已编码）';
+ }
+ $('latStatsState').textContent=info;
+ $('latentDataBadge').textContent='潜变量热图：合成示意 · 未运行 Encoder';
+ if(latentSelect.tab==='grid'){renderLatentGrid();renderLatentFeatures();}
+}
+function latentShowForStage(i){
+ const lab=$('latentWorkbench');if(!lab)return;
+ const visible=[2,3,4,5,6,7].includes(i);
+ if(lab.hidden===visible){lab.hidden=!visible;}
+ if(visible)renderLatent();
+}
+function setupLatentExplorer(){
+ $('latentJump').addEventListener('click',()=>{
+  state.playing=false;goto(3);latentChooseTab('grid');
+  requestAnimationFrame(()=>$('latentWorkbench').scrollIntoView({behavior:'auto',block:'start'}));
+ });
+ for(const [coord,id] of [['x','latX'],['y','latY'],['z','latZ']]){
+  $(id).addEventListener('input',()=>{
+   const p={x:latentSelect.x,y:latentSelect.y,z:latentSelect.z};p[coord]=+$(id).value;
+   latentSetCoords(p.x,p.y,p.z);
+  });
+ }
+ document.querySelectorAll('[data-lat-frame]').forEach(b=>b.addEventListener('click',()=>{
+  latentSelect.frame=+b.dataset.latFrame;
+  document.querySelectorAll('[data-lat-frame]').forEach(q=>q.classList.toggle('active',q===b));
+  renderLatent();if(currentStage()===3)render(performance.now());
+ }));
+ document.querySelectorAll('[data-lat-tab]').forEach(b=>b.addEventListener('click',()=>latentChooseTab(b.dataset.latTab)));
+ $('latentGridCanvas').addEventListener('click',evt=>{
+  const r=evt.currentTarget.getBoundingClientRect();const x=evt.clientX-r.left,y=evt.clientY-r.top;
+  let best=null,dist=1e9;
+  for(const p of latentSelect.points){const dx=p.x-x,dy=p.y-y,d=dx*dx+dy*dy;
+   if(d<dist){dist=d;best=p;}}
+  if(best&&dist<900)latentSetCoords(best.ix,best.iy,best.iz);
+ });
+ $('latentFeaturesCanvas').addEventListener('click',evt=>{
+  const rect=latentSelect.featureRect;if(!rect)return;
+  const r=evt.currentTarget.getBoundingClientRect(),x=evt.clientX-r.left,y=evt.clientY-r.top;
+  const gx=Math.floor((x-rect.ox)/rect.side),gy=Math.floor((y-rect.oy)/rect.side);
+  if(gx>=0&&gx<16&&gy>=0&&gy<16){latentSelect.feature=gy*16+gx;renderLatent();}
+ });
+ $('latentGridCanvas').addEventListener('keydown',evt=>{
+  if(evt.key==='ArrowRight'||evt.key==='ArrowLeft'){evt.preventDefault();latentSetCoords(latentSelect.x+(evt.key==='ArrowRight'?1:-1),latentSelect.y,latentSelect.z);}
+ });
+}
+
+setup();
+setupLatentExplorer();
+</script>
+</body>
+</html>

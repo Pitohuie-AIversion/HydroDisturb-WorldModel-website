@@ -1,0 +1,32 @@
+{
+  "schema": "flowscope.c04.verification.v2",
+  "manifest_sha256": "9e3fa0317a91dcee2a26bcf37ea736764d797e5818f7a876bd476f1fb6e112f2",
+  "frames_verified": 81,
+  "asset_checksums_verified": 1188,
+  "fp32_steps": [
+    835,
+    837,
+    839,
+    841,
+    843,
+    845,
+    851,
+    885,
+    935
+  ],
+  "source_mapping": {
+    "u": "u",
+    "v": "w_cross",
+    "w": "v_span",
+    "p": "p"
+  },
+  "checks": [
+    "Source SHA-256 and Web asset SHA-256",
+    "All four channel volumes and derived spanwise vorticity at every stored voxel and LOD",
+    "All physical coordinates and timestamps",
+    "All three packed masks, voxel by voxel",
+    "Full-resolution six background statistics",
+    "Indexed GLB header, size and primitive checks"
+  ],
+  "result": "passed"
+}

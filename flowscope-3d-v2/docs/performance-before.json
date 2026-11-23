@@ -1,0 +1,506 @@
+{
+  "utc": "2026-11-18T09:00:25.407130+00:00",
+  "browser": "157.0.4341.60",
+  "url": "http://127.0.0.1:8765/",
+  "window": [
+    1920,
+    1080
+  ],
+  "headless": true,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 (0x00002D05) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "drawing_buffer": [
+    1280,
+    516
+  ],
+  "bundle": "index-BrX3GkEZ.js",
+  "cold_first_q_draw_ms": 1075,
+  "cases": {
+    "fullscreen_q_orbit": {
+      "duration_ms": 3067,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.5,
+        "over_50ms": 0
+      },
+      "webgl_frames": 157,
+      "webgl_fps": 51.2,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9,
+      "framebuffer": [
+        1918,
+        1078
+      ],
+      "q_steps_drawn": [
+        835
+      ],
+      "q_capture_interval": {},
+      "q_captures_per_s": 0.3,
+      "pointer_moves": 224
+    },
+    "q_dense_50.04_to_52.92s": {
+      "duration_ms": 9968,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 28.4,
+        "max_ms": 99.9,
+        "over_50ms": 20
+      },
+      "webgl_frames": 24,
+      "webgl_fps": 2.4,
+      "draw_interval": {
+        "median_ms": 428.3,
+        "p95_ms": 528.5,
+        "max_ms": 552.5,
+        "over_50ms": 23
+      },
+      "long_tasks": 1,
+      "longest_task_ms": 51,
+      "median_draw_calls": 9.0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "q_steps_drawn": [
+        837,
+        839,
+        841,
+        843,
+        845,
+        847,
+        849,
+        851,
+        853,
+        855,
+        857,
+        859,
+        861,
+        863,
+        865,
+        867,
+        869,
+        871,
+        873,
+        875,
+        877,
+        879,
+        881,
+        883
+      ],
+      "q_capture_interval": {
+        "median_ms": 428.3,
+        "p95_ms": 528.5,
+        "max_ms": 552.5,
+        "over_50ms": 23
+      },
+      "q_captures_per_s": 2.4,
+      "initial_step": 835,
+      "end_step": 883,
+      "wall_to_end_ms": 9971
+    },
+    "q_temporal_playback": {
+      "duration_ms": 6000,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 28.6,
+        "max_ms": 99.9,
+        "over_50ms": 15
+      },
+      "webgl_frames": 14,
+      "webgl_fps": 2.3,
+      "draw_interval": {
+        "median_ms": 428.6,
+        "p95_ms": 552.5,
+        "max_ms": 552.5,
+        "over_50ms": 13
+      },
+      "long_tasks": 1,
+      "longest_task_ms": 51,
+      "median_draw_calls": 9.0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "q_steps_drawn": [
+        837,
+        839,
+        841,
+        843,
+        845,
+        847,
+        849,
+        851,
+        853,
+        855,
+        857,
+        859,
+        861,
+        863
+      ],
+      "q_capture_interval": {
+        "median_ms": 428.6,
+        "p95_ms": 552.5,
+        "max_ms": 552.5,
+        "over_50ms": 13
+      },
+      "q_captures_per_s": 2.3
+    },
+    "fullscreen_q_streams": {
+      "duration_ms": 3022,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.1,
+        "over_50ms": 0
+      },
+      "webgl_frames": 159,
+      "webgl_fps": 52.6,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 11,
+      "framebuffer": [
+        1918,
+        1078
+      ],
+      "q_steps_drawn": [
+        835
+      ],
+      "q_capture_interval": {},
+      "q_captures_per_s": 0.3
+    },
+    "fullscreen_volume_orbit": {
+      "duration_ms": 3063,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.6,
+        "over_50ms": 0
+      },
+      "webgl_frames": 158,
+      "webgl_fps": 51.6,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.2,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9.0,
+      "framebuffer": [
+        1918,
+        1078
+      ],
+      "pointer_moves": 210
+    },
+    "slice_orbit": {
+      "duration_ms": 3060,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "webgl_frames": 160,
+      "webgl_fps": 52.3,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.2,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9.0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "pointer_moves": 210
+    },
+    "chapter_2_orbit": {
+      "duration_ms": 3043,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 9.5,
+        "over_50ms": 0
+      },
+      "webgl_frames": 157,
+      "webgl_fps": 51.6,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.8,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 32,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "pointer_moves": 208
+    },
+    "chapter_3_orbit": {
+      "duration_ms": 3042,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.7,
+        "over_50ms": 0
+      },
+      "webgl_frames": 157,
+      "webgl_fps": 51.6,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 20.0,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 11,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "pointer_moves": 225
+    },
+    "chapter_3_guided": {
+      "duration_ms": 3008,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 6.2,
+        "over_50ms": 0
+      },
+      "webgl_frames": 158,
+      "webgl_fps": 52.5,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.2,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 11.0,
+      "framebuffer": [
+        1280,
+        516
+      ]
+    },
+    "chapter_4_orbit": {
+      "duration_ms": 3035,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "webgl_frames": 157,
+      "webgl_fps": 51.7,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.2,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 61,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "pointer_moves": 215
+    },
+    "chapter_5_orbit": {
+      "duration_ms": 3046,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "webgl_frames": 157,
+      "webgl_fps": 51.5,
+      "draw_interval": {
+        "median_ms": 19.1,
+        "p95_ms": 19.2,
+        "max_ms": 19.2,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 62,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "pointer_moves": 225
+    },
+    "chapter_6_orbit": {
+      "duration_ms": 3038,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.1,
+        "over_50ms": 0
+      },
+      "webgl_frames": 157,
+      "webgl_fps": 51.7,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.1,
+        "max_ms": 19.2,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 49,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "pointer_moves": 225
+    },
+    "chapter_6_guided": {
+      "duration_ms": 3018,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.1,
+        "over_50ms": 0
+      },
+      "webgl_frames": 158,
+      "webgl_fps": 52.4,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.4,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 49.0,
+      "framebuffer": [
+        1280,
+        516
+      ]
+    },
+    "chapter_7_orbit": {
+      "duration_ms": 3109,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "webgl_frames": 159,
+      "webgl_fps": 51.1,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 23.8,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 42,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "pointer_moves": 184
+    },
+    "chapter_7_guided": {
+      "duration_ms": 3019,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "webgl_frames": 158,
+      "webgl_fps": 52.3,
+      "draw_interval": {
+        "median_ms": 19.0,
+        "p95_ms": 19.2,
+        "max_ms": 19.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 43.0,
+      "framebuffer": [
+        1280,
+        516
+      ]
+    },
+    "q_guided": {
+      "duration_ms": 3083,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 9.6,
+        "max_ms": 104.9,
+        "over_50ms": 7
+      },
+      "webgl_frames": 128,
+      "webgl_fps": 41.5,
+      "draw_interval": {
+        "median_ms": 19.1,
+        "p95_ms": 66.6,
+        "max_ms": 104.9,
+        "over_50ms": 8
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9.0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "q_steps_drawn": [
+        835,
+        837,
+        839,
+        841,
+        843
+      ],
+      "q_capture_interval": {
+        "median_ms": 747.6,
+        "p95_ms": 776.3,
+        "max_ms": 776.3,
+        "over_50ms": 4
+      },
+      "q_captures_per_s": 1.6
+    }
+  },
+  "first_draw_after_chapter_click_ms": {
+    "2": 110,
+    "3": 114,
+    "4": 55,
+    "5": 74,
+    "6": 66,
+    "7": 74
+  },
+  "method": "WebGL submissions in requestAnimationFrame. Q steps match source GLB triangle index count. A static scene redraws only when needed.",
+  "warm_reload_first_q_draw_ms": 299,
+  "javascript_errors": []
+}

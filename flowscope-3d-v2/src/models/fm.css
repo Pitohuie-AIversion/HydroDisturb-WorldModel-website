@@ -1,0 +1,20 @@
+.fm-panel .mc-buttons{gap:5px}
+.fm-controls-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.fm-controls-row .mc-buttons button{padding:4px 8px}
+.fm-panel [data-integrate]:disabled{color:#879593;background:#f3f6f4;cursor:default;border-color:#e0e7e4}
+.fm-panel .fm-step{font-size:12px;font-weight:650;color:#274e56}
+.fm-panel .fm-calc{border:1px solid #d5e1df;border-radius:6px;overflow:hidden}
+.fm-calc header{padding:8px 10px;background:#edf5f2;display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:11px;color:#16625d}
+.fm-calc dl,.fm-short dl{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:3px 6px;margin:0;padding:8px 10px}
+.fm-calc dt,.fm-short dt{font-size:11px;color:#526970}
+.fm-calc dd,.fm-short dd{margin:0;font:600 12px/1.6 Consolas,monospace;color:#2c4655}
+.fm-calc [data-fm-value=velocity]{color:#724a99}
+.fm-calc [data-fm-value=next]{color:#98531f}
+.fm-panel .fm-equation{font:600 11px/1.55 Consolas,monospace;color:#263f45;background:#f5f7f5;padding:7px 9px;border-top:1px solid #e0e6e1}
+.fm-panel .fm-intermediate{padding:5px 9px;color:#7e5326;font-size:11px;line-height:1.5}
+.fm-panel .fm-states{margin-top:-3px;font-size:11px;color:#4b636b;line-height:1.55}
+.fm-short{border-left:3px solid #d09e65;padding-left:9px;display:grid;gap:4px}
+.fm-short[hidden]{display:none}
+.fm-short strong{color:#815323;font-size:12px}
+.fm-short dl{padding:3px 0;gap:2px 6px}
+.fm-panel .fm-source{line-height:1.5;font-size:11px}

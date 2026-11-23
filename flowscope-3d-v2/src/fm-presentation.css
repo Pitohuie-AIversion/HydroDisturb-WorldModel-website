@@ -1,0 +1,237 @@
+/* Latent-space drawing and its computation strip share the ocean-blue stage. */
+body[data-chapter="fm"] .viewport.fm-view {
+  --fm-light: #dff7ff;
+  --fm-amber: #ffbe77;
+  height: clamp(385px, 48vh, 650px);
+  border: 1px solid #153b54;
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background: radial-gradient(ellipse at 61% 68%, #123b56 0%, #0b2a42 39%, #071c32 76%);
+}
+.fm-view .viewport-head { justify-content:flex-end; }
+.fm-view > .canvas-shell { top:49px; bottom:16px; }
+.fm-view .viewport-tag { display:none; }
+.fm-view .view-actions button,
+.fm-view .viewport-foot > span {
+  color:#d7ecf6;
+  border-color:#436079;
+  background:#0a243b;
+}
+.fm-view .view-actions button:hover,
+.fm-view .view-actions button[aria-pressed=true] {
+  color:#fff;
+  border-color:#57b4df;
+  background:#11405f;
+}
+.fm-view .stage-legend.fm-legend {
+  gap:11px;
+  border:0;
+  padding:3px 0;
+  min-width:0;
+  color:#d3e3ef;
+  background:transparent;
+}
+.fm-view .fm-legend i { border-color:#36c4ff; }
+.fm-view .fm-legend .active { border-color:#ffbe77; }
+.fm-view .fm-legend .active::after { border-left-color:#ffbe77; }
+.fm-view .fm-legend .future { border-color:#81a6c5; }
+.fm-view .fm-legend i.fm-floor-key {
+  height:7px;
+  border:0;
+  border-top:1px solid #36c4ff;
+  background:linear-gradient(#0098dc88,#0098dc11);
+}
+.fm-view .fm-plot-caption {
+  position:absolute;
+  top:clamp(14px,1.3vw,21px);
+  left:clamp(15px,2.1vw,34px);
+  display:grid;
+  justify-items:start;
+  grid-template-columns:auto 1fr;
+  align-items:baseline;
+  gap:2px 13px;
+  max-width:62%;
+  pointer-events:none;
+  color:var(--fm-light);
+}
+.fm-plot-caption span {
+  grid-column:1/-1;
+  font:600 clamp(10px,.82vw,13px)/1.45 var(--mono);
+  letter-spacing:.035em;
+  color:#8cdcff;
+}
+.fm-plot-caption b {
+  font:650 clamp(23px,2.1vw,36px)/1.19 "Microsoft YaHei","Segoe UI",sans-serif;
+  letter-spacing:-.045em;
+  color:white;
+}
+.fm-plot-caption small {
+  font:12px/1.45 var(--mono);
+  color:#c3d9e8;
+}
+body[data-chapter="fm"] .workbench {
+  grid-template-columns:minmax(0,1fr) clamp(270px,21vw,350px);
+}
+body[data-chapter="fm"] .workbench:has(.fm-score) .inspector {
+  max-height:none;
+  border-color:#b7cbd8;
+}
+.fm-score {
+  min-width:0;
+  padding:13px clamp(14px,2vw,30px) 15px;
+  border:1px solid #153b54;
+  border-top:1px solid #2a506c;
+  border-radius:0 0 10px 10px;
+  background:#091f34;
+  color:#f1f8fd;
+}
+.fm-score-heading {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:5px 12px;
+  margin-bottom:12px;
+}
+.fm-score-heading h3 {margin:0;font-size:15px;letter-spacing:.015em}
+.fm-score-heading span {font:11px/1.45 var(--mono);color:#aecbdc}
+.fm-phase-track {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:3px;
+}
+.fm-phase-track button {
+  min-width:0;
+  text-align:left;
+  padding:8px clamp(6px,1vw,16px) 10px;
+  border:0;
+  border-top:2px solid #33546b;
+  border-radius:0;
+  background:#112f46;
+  color:#c0d6e4;
+}
+.fm-phase-track button span,.fm-phase-track button strong {display:block}
+.fm-phase-track button span {font-size:12px;font-weight:600}
+.fm-phase-track button strong {
+  font:600 clamp(11px,1.05vw,17px)/1.35 var(--mono);
+  margin-top:4px;
+  color:#edf6fb;
+  font-variant-numeric:tabular-nums;
+  overflow-wrap:anywhere;
+}
+.fm-phase-track button:hover {background:#1c435c}
+.fm-phase-track button[aria-pressed=true] {
+  border-color:#4bc9ff;
+  color:#03233a;
+  background:#70d6ff;
+}
+.fm-phase-track button[aria-pressed=true] strong { color:#03233a; }
+.fm-phase-track button:last-child[aria-pressed=true] {background:#ffcd95;border-color:#ffbe77}
+.fm-evidence {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:3px 8px;
+  min-height:26px;
+  margin-top:11px;
+  font:13px/1.5 var(--mono);
+  color:#e0eff8;
+}
+.fm-evidence span {border-bottom:1px solid #52758d}
+.fm-evidence b {color:#8fdcff}
+.fm-score[data-phase="3"] .fm-evidence b {color:#ffcd95}
+.fm-evidence i {font-style:normal;color:#8facbf}
+.fm-evidence small {color:#abcadd}
+.fm-score p {margin:5px 0 0;color:#c3d8e8;font-size:12px;line-height:1.6}
+.fm-panel.model-controls {
+  padding:8px 0 2px;
+  gap:12px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.fm-panel.model-controls::before {display:none}
+.fm-step-heading {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:4px;
+}
+.fm-step-heading strong {color:#0b3653;font-size:15px}
+.fm-step-heading span {color:#486379;font:11px/1.45 var(--mono)}
+.fm-step-index {display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:3px}
+.fm-step-index button {
+  min-width:0;
+  padding:6px 0;
+  color:#37546b;
+  border:1px solid #cadbe5;
+  background:#f3f8fb;
+  font:600 13px/1.4 var(--mono);
+}
+.fm-step-index button.is-complete {color:#006296;background:#d9f3ff;border-color:#a8dff5}
+.fm-step-index button[aria-pressed=true] {background:#092f4d;color:#f4fbff;border-color:#092f4d}
+.fm-lesson-transport {display:grid;gap:6px}
+.fm-lesson-transport .fm-run {
+  width:100%;
+  padding:9px 10px;
+  border:1px solid #067bb2;
+  color:white;
+  background:#0076ad;
+  font-family:inherit;
+  font-size:13px;
+  line-height:1.35;
+  font-weight:650;
+}
+.fm-lesson-transport .fm-run:hover {background:#005f90}
+.fm-run::before {content:'▶';font-size:10px;margin-right:8px}
+.fm-run[aria-pressed=true]::before {content:'Ⅱ'}
+.fm-step-nav {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.fm-step-nav button {border-color:#b7cedb;color:#234961;padding:5px 2px;font-size:11px;line-height:1.35}
+.fm-panel .mc-range output {color:#00699f}
+.fm-panel .mc-range input,.fm-panel .mc-check input {accent-color:#0079b3}
+.fm-panel .mc-buttons button[aria-pressed=true] {background:#e0f5ff;color:#075b8d;border-color:#8ccbe7;box-shadow:none}
+.fm-panel .mc-details summary {color:#085577}
+.fm-panel .fm-calc {border:1px solid #bccfdc;border-radius:5px;overflow:hidden}
+.fm-panel .fm-calc header {padding:8px 11px;background:#102f48;color:#e9f6ff}
+.fm-panel .fm-calc dl {background:#f3f8fb;gap:3px 8px;padding:7px 11px}
+.fm-panel .fm-calc dt {color:#3b576b;align-self:center}
+.fm-panel .fm-calc dd {font-size:14px;color:#14364e}
+.fm-panel [data-fm-value=current] {color:#0b496e}
+.fm-panel [data-fm-value=velocity] {color:#006598}
+.fm-panel [data-fm-value=next] {font-size:18px;line-height:1.35;color:#8a440e}
+.fm-panel .fm-equation {padding:8px 10px;border-top:1px solid #d1e1e9;background:#e3f4fd;color:#0c3e5a}
+.fm-panel .fm-states {border-left:2px solid #0098dc;margin-top:0;padding-left:8px;color:#355368}
+.fm-fallback-plot {width:100%;height:100%;display:block}
+.fm-view:fullscreen .fm-score {position:absolute;bottom:52px;left:3vw;right:3vw;background:#091f34}
+@media (max-width:1000px) and (min-width:701px) {
+  body[data-chapter="fm"] .workbench {grid-template-columns:minmax(0,1fr) 240px}
+  .fm-phase-track button {padding:7px 5px}
+}
+@media (max-width:700px) {
+  body[data-chapter="fm"] .workbench {grid-template-columns:minmax(0,1fr)}
+  body[data-chapter="fm"] .viewport.fm-view {height:clamp(270px,69vw,365px)}
+  .fm-view .view-actions {gap:3px}
+  .fm-view .view-actions button {height:27px;min-width:28px;width:28px}
+  .fm-view .view-actions #projection-toggle {min-width:35px}
+  .fm-view .fm-plot-caption {top:12px;left:12px;gap:2px;max-width:calc(100% - 145px)}
+  .fm-view > .canvas-shell {top:32px;bottom:14px}
+  .fm-plot-caption b {font-size:22px}
+  .fm-plot-caption span,.fm-plot-caption small {font-size:9px}
+  .fm-plot-caption small {display:none}
+  .fm-score {padding:10px}
+  .fm-score-heading {margin-bottom:8px}
+  .fm-phase-track button {padding:6px 4px}
+  .fm-phase-track button strong {font-size:10.5px}
+  .fm-phase-track button span {font-size:11px}
+  .fm-evidence {gap:3px 5px;font-size:11px}
+  .fm-score > .fm-lesson-transport {
+    grid-template-columns:minmax(88px,1fr) minmax(0,1.8fr);
+    gap:5px;
+    margin-bottom:9px;
+  }
+  .fm-score .fm-lesson-transport button {border-radius:4px}
+  .fm-step-nav button {min-height:32px}
+}
+

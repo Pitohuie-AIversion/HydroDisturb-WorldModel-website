@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0098dc">
+  <link rel="icon" type="image/png" sizes="128x128" href="./assets/brand/sealien-mark.png">
+  <title>FlowScope 3D · 深海智人流场世界模型</title>
+  <link rel="stylesheet" href="./src/style.css">
+  <link rel="stylesheet" href="./src/brand.css">
+  <link rel="stylesheet" href="./src/process-exhibit.css">
+</head>
+<body>
+<header class="mast">
+  <a class="brand" href="#wake" aria-label="深海智人 FlowScope 首页">
+    <img id="brand-logo" src="./assets/brand/sealien-wordmark.png" width="960" height="222" alt="SEALIEN 深海智人">
+  </a>
+  <span class="mast-separator"></span><div class="project-name"><b>FlowScope <span>3D</span></b><small>流场世界模型</small></div>
+  <div class="mast-actions"><button id="resources" type="button" class="text-button">演示资料</button><button id="tour" type="button" class="primary"><span aria-hidden="true">▷</span> 自动讲解</button></div>
+</header>
+<div class="shell">
+  <aside class="chapters"><div class="rail-title"><span>章节目录</span><small>01 — 07</small></div><nav id="chapters" aria-label="场景章节"></nav>
+    <div class="rail-end"><span class="rail-line"></span><small>研究基准</small><b>Flow World Model</b><span>V1.2 · K = 1</span></div>
+  </aside>
+  <main>
+    <header class="page-head" id="chapter-head">
+      <div class="heading-meta"><span class="chapter-en" id="chapter-en"></span><span class="source-tag" id="source-tag" role="status">加载中</span></div>
+      <h1 id="title"></h1><p id="subtitle"></p>
+      <dl class="wake-specs" id="wake-specs" hidden>
+        <div><dt>雷诺数 <i>Re</i></dt><dd>126,167</dd></div>
+        <div><dt>圆柱直径 <i>D</i></dt><dd>0.30 <small>m</small></dd></div>
+      </dl>
+    </header>
+    <div class="workbench">
+      <div class="scene-column">
+        <section class="viewport" id="viewport" aria-label="交互式三维场景">
+          <div class="canvas-shell" id="canvas-shell"></div>
+          <div class="viewport-head"><span class="viewport-tag"><i></i><span id="stage-tag">三维视图</span><span id="stage-time"></span></span><div class="view-actions"><button type="button" id="projection-toggle" title="切换正交/透视视角" aria-label="切换正交/透视视角"></button><button type="button" id="reset-camera" title="复位相机" aria-label="复位相机">⟲</button><button type="button" id="capture" title="导出当前场景 PNG" aria-label="导出场景截图">▣</button><button type="button" id="fullscreen" title="全屏视图" aria-label="全屏视图">⛶</button></div></div>
+          <div class="loading" id="loading" role="status">载入场景…</div>
+          <div class="viewport-foot"><div class="stage-legend" id="legend"></div><span id="camera-hint">拖动旋转 · 滚轮缩放</span></div>
+        </section>
+        <section class="transport" aria-label="七章讲解"><button id="play" type="button" class="round-play" aria-label="播放讲解">▶</button><div class="track-area"><div class="track-meta"><b>七章讲解进度</b><span id="elapsed"></span></div><input id="master" type="range" min="0" max="8399" value="0" aria-label="讲解主时间轴"><div class="ticks" id="ticks"></div></div><button type="button" id="mute" aria-pressed="false" aria-label="切换导览旁白">旁白开</button><select aria-label="讲解倍速" title="讲解倍速" id="rate"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select><button class="skip" id="next" type="button" title="下一章" aria-label="下一章">▸▏</button></section>
+      </div>
+      <aside class="inspector"><div class="inspect-head"><div><small id="panel-kicker">EXPLORER</small><h2 id="panel-title">场景参数</h2></div><span class="inspect-icon">⌘</span></div><div id="panel"></div></aside>
+    </div>
+    <section class="details" id="details"></section>
+    <footer><span>FlowScope 3D <b>/</b> V2.0</span><span id="footer-state">本地展示</span></footer>
+  </main>
+</div>
+<dialog id="resources-dialog"><header><div><small>REFERENCE LIBRARY</small><h2>演示资料</h2></div><button id="close-dialog" type="button" aria-label="关闭资料">×</button></header><div id="resources-list"></div></dialog>
+<script>
+if(location.protocol==='file:') document.getElementById('loading').textContent='请双击同目录的 Start FlowScope.cmd。启动器会打开本地网页并加载三维资源。';
+</script>
+<script type="module" src="./src/main.ts"></script>
+</body>
+</html>
+

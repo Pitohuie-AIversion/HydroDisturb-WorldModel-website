@@ -1,0 +1,4 @@
+node_modules/
+.vite/
+public/library/
+public/scripts/

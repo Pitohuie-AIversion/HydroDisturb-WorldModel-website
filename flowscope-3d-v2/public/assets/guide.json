@@ -1,0 +1,387 @@
+{
+  "starts": [
+    0.0,
+    33.766666666666666,
+    65.06666666666666,
+    96.96666666666667,
+    127.43333333333334,
+    164.63333333333333,
+    290.8666666666667
+  ],
+  "duration": 333.1666666666667,
+  "fps": 30,
+  "shots": [
+    {
+      "id": "wake.start",
+      "chapter": 1,
+      "startFrame": 0,
+      "frames": 184,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "wake.play",
+      "chapter": 1,
+      "startFrame": 184,
+      "frames": 240,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "wake.lower",
+      "chapter": 1,
+      "startFrame": 424,
+      "frames": 299,
+      "subStarts": [
+        5,
+        163
+      ]
+    },
+    {
+      "id": "wake.upper",
+      "chapter": 1,
+      "startFrame": 723,
+      "frames": 290,
+      "subStarts": [
+        5,
+        151
+      ]
+    },
+    {
+      "id": "enc_input",
+      "chapter": 2,
+      "startFrame": 1013,
+      "frames": 236,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "enc_s2c1",
+      "chapter": 2,
+      "startFrame": 1249,
+      "frames": 226,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "enc_s2c2",
+      "chapter": 2,
+      "startFrame": 1475,
+      "frames": 249,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "enc_token",
+      "chapter": 2,
+      "startFrame": 1724,
+      "frames": 228,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "lat_position",
+      "chapter": 3,
+      "startFrame": 1952,
+      "frames": 210,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "lat_raw",
+      "chapter": 3,
+      "startFrame": 2162,
+      "frames": 241,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "lat_norm",
+      "chapter": 3,
+      "startFrame": 2403,
+      "frames": 238,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "lat_probe",
+      "chapter": 3,
+      "startFrame": 2641,
+      "frames": 268,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "dec_expand",
+      "chapter": 4,
+      "startFrame": 2909,
+      "frames": 234,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "dec_curl",
+      "chapter": 4,
+      "startFrame": 3143,
+      "frames": 226,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "dec_stats",
+      "chapter": 4,
+      "startFrame": 3369,
+      "frames": 206,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "dec_mask",
+      "chapter": 4,
+      "startFrame": 3575,
+      "frames": 248,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "time_prefix",
+      "chapter": 5,
+      "startFrame": 3823,
+      "frames": 313,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "time_clean",
+      "chapter": 5,
+      "startFrame": 4136,
+      "frames": 189,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "time_q1",
+      "chapter": 5,
+      "startFrame": 4325,
+      "frames": 103,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "time_q2",
+      "chapter": 5,
+      "startFrame": 4428,
+      "frames": 81,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "time_q3",
+      "chapter": 5,
+      "startFrame": 4509,
+      "frames": 69,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "time_q4",
+      "chapter": 5,
+      "startFrame": 4578,
+      "frames": 148,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "time_training",
+      "chapter": 5,
+      "startFrame": 4726,
+      "frames": 213,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "fm.setup",
+      "chapter": 6,
+      "startFrame": 4939,
+      "frames": 416,
+      "subStarts": [
+        5,
+        240
+      ]
+    },
+    {
+      "id": "fm.query",
+      "chapter": 6,
+      "startFrame": 5355,
+      "frames": 179,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "fm.history",
+      "chapter": 6,
+      "startFrame": 5534,
+      "frames": 256,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "fm.velocity",
+      "chapter": 6,
+      "startFrame": 5790,
+      "frames": 260,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "fm.step1",
+      "chapter": 6,
+      "startFrame": 6050,
+      "frames": 275,
+      "subStarts": [
+        5,
+        156
+      ]
+    },
+    {
+      "id": "fm.step2",
+      "chapter": 6,
+      "startFrame": 6325,
+      "frames": 304,
+      "subStarts": [
+        5,
+        184
+      ]
+    },
+    {
+      "id": "fm.step3",
+      "chapter": 6,
+      "startFrame": 6629,
+      "frames": 284,
+      "subStarts": [
+        5,
+        162
+      ]
+    },
+    {
+      "id": "fm.step4",
+      "chapter": 6,
+      "startFrame": 6913,
+      "frames": 301,
+      "subStarts": [
+        5,
+        144
+      ]
+    },
+    {
+      "id": "fm.step5",
+      "chapter": 6,
+      "startFrame": 7214,
+      "frames": 326,
+      "subStarts": [
+        5,
+        243
+      ]
+    },
+    {
+      "id": "fm.step6",
+      "chapter": 6,
+      "startFrame": 7540,
+      "frames": 265,
+      "subStarts": [
+        5,
+        112
+      ]
+    },
+    {
+      "id": "fm.step7",
+      "chapter": 6,
+      "startFrame": 7805,
+      "frames": 331,
+      "subStarts": [
+        5,
+        177
+      ]
+    },
+    {
+      "id": "fm.step8",
+      "chapter": 6,
+      "startFrame": 8136,
+      "frames": 311,
+      "subStarts": [
+        5,
+        136
+      ]
+    },
+    {
+      "id": "fm.end",
+      "chapter": 6,
+      "startFrame": 8447,
+      "frames": 279,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "roll_history",
+      "chapter": 7,
+      "startFrame": 8726,
+      "frames": 237,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "roll_decode",
+      "chapter": 7,
+      "startFrame": 8963,
+      "frames": 254,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "roll_fifo",
+      "chapter": 7,
+      "startFrame": 9217,
+      "frames": 262,
+      "subStarts": [
+        5
+      ]
+    },
+    {
+      "id": "roll_profile",
+      "chapter": 7,
+      "startFrame": 9479,
+      "frames": 516,
+      "subStarts": [
+        5,
+        274
+      ]
+    }
+  ]
+}

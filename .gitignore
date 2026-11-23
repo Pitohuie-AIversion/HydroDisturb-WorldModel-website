@@ -1,0 +1,18 @@
+# Build artifacts, duplicate offline packages & local hosting snapshots
+site-publish/
+flowscope-3d-v2/deliverables/
+flowscope-3d-v2/dist/
+
+# Dependencies & caches
+node_modules/
+flowscope-3d-v2/node_modules/
+.vite/
+__pycache__/
+*.py[cod]
+
+# Duplicate large local library assets (already ignored in flowscope-3d-v2/.gitignore)
+flowscope-3d-v2/public/library/
+flowscope-3d-v2/public/scripts/
+
+.DS_Store
+Thumbs.db

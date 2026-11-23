@@ -1,0 +1,668 @@
+{
+  "utc": "2026-11-18T09:16:53.543418+00:00",
+  "browser": "157.0.4341.60",
+  "url": "http://127.0.0.1:8876/",
+  "window": [
+    1920,
+    1080
+  ],
+  "headless": false,
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 (0x00002D05) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "drawing_buffer": [
+    1280,
+    516
+  ],
+  "bundle": "index-CCqkwv7a.js",
+  "cold_first_q_draw_ms": 989,
+  "cases": {
+    "fullscreen_q_orbit": {
+      "duration_ms": 3093,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 9.6,
+        "over_50ms": 0
+      },
+      "webgl_frames": 622,
+      "webgl_fps": 201.1,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 9.6,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1918,
+        1078
+      ],
+      "q_steps_drawn": [
+        835
+      ],
+      "q_capture_interval": {},
+      "q_captures_per_s": 0.3,
+      "compositor_presented_frames": 608,
+      "compositor_feedback_fps": 196.6,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 5.0,
+        "max_ms": 9.7,
+        "over_50ms": 0
+      },
+      "pointer_moves": 225
+    },
+    "q_dense_50.04_to_52.92s": {
+      "duration_ms": 2827,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "webgl_frames": 29,
+      "webgl_fps": 10.3,
+      "draw_interval": {
+        "median_ms": 119.0,
+        "p95_ms": 123.9,
+        "max_ms": 123.9,
+        "over_50ms": 24
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "q_steps_drawn": [
+        835,
+        837,
+        839,
+        841,
+        843,
+        845,
+        847,
+        849,
+        851,
+        853,
+        855,
+        857,
+        859,
+        861,
+        863,
+        865,
+        867,
+        869,
+        871,
+        873,
+        875,
+        877,
+        879,
+        881,
+        883
+      ],
+      "q_capture_interval": {
+        "median_ms": 119.0,
+        "p95_ms": 123.9,
+        "max_ms": 123.9,
+        "over_50ms": 24
+      },
+      "q_captures_per_s": 8.8,
+      "initial_step": 835,
+      "end_step": 883,
+      "wall_to_end_ms": 2827
+    },
+    "q_temporal_playback": {
+      "duration_ms": 6000,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 9.5,
+        "over_50ms": 0
+      },
+      "webgl_frames": 32,
+      "webgl_fps": 5.3,
+      "draw_interval": {
+        "median_ms": 119,
+        "p95_ms": 538.0,
+        "max_ms": 1499.9,
+        "over_50ms": 27
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "q_steps_drawn": [
+        835,
+        837,
+        839,
+        841,
+        843,
+        845,
+        847,
+        849,
+        851,
+        853,
+        855,
+        857,
+        859,
+        861,
+        863,
+        865,
+        867,
+        869,
+        871,
+        873,
+        875,
+        877,
+        879,
+        881,
+        883,
+        885,
+        901,
+        935
+      ],
+      "q_capture_interval": {
+        "median_ms": 119.1,
+        "p95_ms": 538.0,
+        "max_ms": 1499.9,
+        "over_50ms": 27
+      },
+      "q_captures_per_s": 4.7
+    },
+    "fullscreen_q_streams": {
+      "duration_ms": 3015,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "webgl_frames": 626,
+      "webgl_fps": 207.6,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 11.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1918,
+        1078
+      ],
+      "q_steps_drawn": [
+        835
+      ],
+      "q_capture_interval": {},
+      "q_captures_per_s": 0.3,
+      "compositor_presented_frames": 618,
+      "compositor_feedback_fps": 205.0,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.8,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      }
+    },
+    "fullscreen_volume_orbit": {
+      "duration_ms": 3057,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 5.0,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "webgl_frames": 599,
+      "webgl_fps": 195.9,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 5.0,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1918,
+        1078
+      ],
+      "compositor_presented_frames": 572,
+      "compositor_feedback_fps": 187.1,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 9.5,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "pointer_moves": 201
+    },
+    "slice_orbit": {
+      "duration_ms": 3062,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 14.4,
+        "over_50ms": 0
+      },
+      "webgl_frames": 629,
+      "webgl_fps": 205.4,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 14.4,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 614,
+      "compositor_feedback_fps": 200.5,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.8,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "pointer_moves": 216
+    },
+    "chapter_2_orbit": {
+      "duration_ms": 3048,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "webgl_frames": 630,
+      "webgl_fps": 206.7,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 32.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 629,
+      "compositor_feedback_fps": 206.4,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.8,
+        "max_ms": 14.4,
+        "over_50ms": 0
+      },
+      "pointer_moves": 210
+    },
+    "chapter_3_orbit": {
+      "duration_ms": 3059,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 9.6,
+        "over_50ms": 0
+      },
+      "webgl_frames": 624,
+      "webgl_fps": 204.0,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 19.2,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 11.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 612,
+      "compositor_feedback_fps": 200.1,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.8,
+        "max_ms": 19.1,
+        "over_50ms": 0
+      },
+      "pointer_moves": 158
+    },
+    "chapter_3_guided": {
+      "duration_ms": 3016,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 6.3,
+        "over_50ms": 0
+      },
+      "webgl_frames": 633,
+      "webgl_fps": 209.9,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 6.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 11,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 626,
+      "compositor_feedback_fps": 207.5,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.8,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      }
+    },
+    "chapter_4_orbit": {
+      "duration_ms": 3038,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "webgl_frames": 628,
+      "webgl_fps": 206.7,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 61.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 624,
+      "compositor_feedback_fps": 205.4,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.8,
+        "max_ms": 9.6,
+        "over_50ms": 0
+      },
+      "pointer_moves": 221
+    },
+    "chapter_5_orbit": {
+      "duration_ms": 3052,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 38.3,
+        "over_50ms": 0
+      },
+      "webgl_frames": 622,
+      "webgl_fps": 203.8,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 38.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 62.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 619,
+      "compositor_feedback_fps": 202.8,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 38.2,
+        "over_50ms": 0
+      },
+      "pointer_moves": 224
+    },
+    "chapter_6_orbit": {
+      "duration_ms": 3040,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5,
+        "over_50ms": 0
+      },
+      "webgl_frames": 629,
+      "webgl_fps": 206.9,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 49,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 621,
+      "compositor_feedback_fps": 204.2,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 14.3,
+        "over_50ms": 0
+      },
+      "pointer_moves": 225
+    },
+    "chapter_6_guided": {
+      "duration_ms": 3023,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.1,
+        "over_50ms": 0
+      },
+      "webgl_frames": 635,
+      "webgl_fps": 210.1,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.1,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 49,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 632,
+      "compositor_feedback_fps": 209.1,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 9.7,
+        "over_50ms": 0
+      }
+    },
+    "chapter_7_orbit": {
+      "duration_ms": 3051,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "webgl_frames": 631,
+      "webgl_fps": 206.8,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 5.0,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 42,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 625,
+      "compositor_feedback_fps": 204.9,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 9.6,
+        "over_50ms": 0
+      },
+      "pointer_moves": 204
+    },
+    "chapter_7_guided": {
+      "duration_ms": 3021,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 28.5,
+        "over_50ms": 0
+      },
+      "webgl_frames": 630,
+      "webgl_fps": 208.5,
+      "draw_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 28.5,
+        "over_50ms": 0
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 43.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "compositor_presented_frames": 627,
+      "compositor_feedback_fps": 207.5,
+      "compositor_feedback_interval": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 38.1,
+        "over_50ms": 0
+      }
+    },
+    "q_guided": {
+      "duration_ms": 3023,
+      "raf": {
+        "median_ms": 4.8,
+        "p95_ms": 4.9,
+        "max_ms": 9.7,
+        "over_50ms": 0
+      },
+      "webgl_frames": 24,
+      "webgl_fps": 7.9,
+      "draw_interval": {
+        "median_ms": 119.1,
+        "p95_ms": 123.8,
+        "max_ms": 123.9,
+        "over_50ms": 23
+      },
+      "long_tasks": 0,
+      "longest_task_ms": 0,
+      "median_draw_calls": 9.0,
+      "timer_or_other_draw_frames": 0,
+      "framebuffer": [
+        1280,
+        516
+      ],
+      "q_steps_drawn": [
+        837,
+        839,
+        841,
+        843,
+        845,
+        847,
+        849,
+        851,
+        853,
+        855,
+        857,
+        859,
+        861,
+        863,
+        865,
+        867,
+        869,
+        871,
+        873,
+        875,
+        877,
+        879,
+        881,
+        883
+      ],
+      "q_capture_interval": {
+        "median_ms": 119.1,
+        "p95_ms": 123.8,
+        "max_ms": 123.9,
+        "over_50ms": 23
+      },
+      "q_captures_per_s": 7.9,
+      "compositor_presented_frames": 110,
+      "compositor_feedback_fps": 36.4,
+      "compositor_feedback_interval": {
+        "median_ms": 18.9,
+        "p95_ms": 62.0,
+        "max_ms": 66.7,
+        "over_50ms": 26
+      }
+    }
+  },
+  "first_draw_after_chapter_click_ms": {
+    "2": 115,
+    "3": 91,
+    "4": 56,
+    "5": 72,
+    "6": 61,
+    "7": 117
+  },
+  "method": "WebGL submissions grouped by animation callback or synchronous draw task. Q steps match source GLB triangle index count. A static scene redraws only when needed.",
+  "warm_reload_first_q_draw_ms": 236,
+  "javascript_errors": []
+}
